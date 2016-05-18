@@ -1,17 +1,13 @@
+package view;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import javax.swing.JPanel;
 import javax.swing.*;
 
 public class Frame extends JFrame {
-//	JButton b1 = new JButton("Botao 1");
-//	JButton b2 = new JButton("Botao 2");
-	JPanel p = new JPanel();
+	
+	Panel p = new Panel();
 	
 	public Frame() {
-//		p.add(b1);
-//		p.add(b2);
+
 		p.setBackground(Color.WHITE);
 		getContentPane().add(p);
 		setSize(600, 600);
@@ -19,4 +15,10 @@ public class Frame extends JFrame {
 		
 		getContentPane().add(new Panel());
 	}
+	
+	// get painel
+	public Panel getPainel() {
+		return p;
+	}
+
 }
