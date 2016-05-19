@@ -19,10 +19,7 @@ public class Frame extends JFrame {
 				int dado = GameController.getValorDado();
 	
 				label.setText(Integer.toString(dado));
-				System.out.println(dado);
 				
-//				JOptionPane.showMessageDialog(p,dado);
-//				System.out.println(dado);
 			}
 		});
 		
