@@ -28,10 +28,13 @@ public class Panel extends JPanel {
 		fazRetangulo(0.0, 360.0, 240.0, 240.0, Color.YELLOW, g2d);
 		fazRetangulo(360.0, 360.0, 240.0, 240.0, Color.BLUE, g2d);
 		
-		// Faz os pinos
+		// Time Verde
 		criaPinos(50.0, 50.0, g2d);
+		// Time Vermelho
 		criaPinos(410.0, 50.0, g2d);
+		// Time Amarelo
 		criaPinos(50.0, 410.0, g2d);
+		// Time Azul
 		criaPinos(410.0, 410.0, g2d);
 		
 		// Faz casas vermelhas
@@ -150,4 +153,6 @@ public class Panel extends JPanel {
 		g2d.setPaint(cor);
 		g2d.fillPolygon(arrayPontosX, arrayPontosY, 3);
 	}
+	
+	
 }

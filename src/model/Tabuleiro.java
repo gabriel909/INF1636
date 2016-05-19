@@ -28,10 +28,55 @@ public class Tabuleiro {
 		}
 	}
 	
-	// Get casas
+	// Get Casas
 	public List<Casa> getCasas() {
 		return casas;
 	}
 	
+	/*
+	 * Método que movimenta os pinos
+	 * 
+	 * Parametros ( Pino que vai se movimentar e o valor do dado )
+	 * checar se no caminho até a casa destino existe uma barreira
+	 * Se existir para na casa imediatamente antes da barreira
+	 * checar se na casa destino tem um pino adversario
+	 * se existir, esse pino retorna para o inicio e o pino em movimento chega na casa destino
+	 * 
+	 */
+	public boolean movimentaPinos(Pino pinoEmMovimento, int valorDado) {
+		
+//		if(pinoEmMovimento.estaCasaInicial == false) {
+//			int casaInicioPino = pinoEmMovimento.casaAtual, casaDestino = casas.size();
+//			for(int i = casaInicioPino; i < casaDestino; i++) {
+//				Casa casa = casas.get(i);
+//				List<Pino> pinos = casa.getPinos();
+//				if(pinos.size() == 2 || pinoEmMovimento.estaCasaInicial == true) {
+//
+//				}
+//				if(pinos.size() == 2 || pinoEmMovimento.estaCasaInicial == true) {
+//
+//				}
+//
+//			}
+//		} else {
+//			Casa casa = casas.get(pinoEmMovimento.getNumeroCasaDeSaida());
+//			List<Pino> pinos = casa.getPinos();
+//			if(valorDado == 5) {
+//				
+//				
+//			}
+//		}
+//		return false;
+		
+		int casaDestino = pinoEmMovimento.casaAtual + valorDado;
+		boolean conseguiuMover = casas.get(casaDestino).adicionaPino(pinoEmMovimento);
+		if(conseguiuMover) {
+			pinoEmMovimento.casaAtual = casaDestino;
+			return true;
+		} else {
+			return false;
+		}
+	
+	}
 	
 }

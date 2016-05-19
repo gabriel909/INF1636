@@ -1,7 +1,8 @@
 package controller;
 
 import view.Panel;
-import model.Tabuleiro;
+import model.*;
+import java.util.*;
 
 public class GameController {
 	Tabuleiro tabuleiro;
@@ -13,5 +14,13 @@ public class GameController {
 	}
 	
 	// get posição peça
+	public void updateView() {
+		List<Casa> casas = tabuleiro.getCasas();
+		
+		for(int i=0; i < casas.size(); i++) {
+			
+			
+		}
+	}
 	
 }
