@@ -3,15 +3,16 @@ package model;
 import java.util.*;
 
 public class Tabuleiro {
+	private static Tabuleiro tabuleiro = new Tabuleiro();
 	
 	private List<Casa> casas = new ArrayList<Casa>();
-	private float x, y = 240;
-	public Tabuleiro() {
+	private float x = 0, y = 240;
+	
+	private Tabuleiro() {
 	
 		for(int i = 0; i < 52; i++) {
 			
-			if(i >= 0 && i < 3) {
-				x = 0;
+			if(i > 0 && i < 3) {
 				y += 40;
 			}
 			
@@ -79,4 +80,7 @@ public class Tabuleiro {
 	
 	}
 	
+	public static Tabuleiro getTabuleiro() {
+		return tabuleiro;
+	}
 }
