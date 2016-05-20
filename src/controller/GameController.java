@@ -20,9 +20,11 @@ public class GameController {
 		
 		for(int i=0; i < casas.size(); i++) {
 			Casa casa = casas.get(i);
-			painel.casasCoord.add(casa.getCoord()); 
+			painel.casasCoord.add(casa.getCoord());
+			
 		}
 	}
+
 	
 	public static int getValorDado() {
 		dado =  Dado.rolarDados();
