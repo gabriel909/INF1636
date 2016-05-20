@@ -21,6 +21,22 @@ public class Tabuleiro {
 		return casas;
 	}
 	
+	// Get Pinos
+	public List<Integer> getPinoCoords() {
+		List<Pino> pinos;
+		Equipe equipe;
+		List<Integer> pinoCoord = new ArrayList<Integer>();
+		for(int i = 0; i < equipes.size(); i++) {
+			equipe = equipes.get(i);
+			pinos = equipe.getPinos();
+			for(int j = 0; j < pinos.size(); j++) {
+				pinoCoord.add(pinos.get(j).casaAtual);
+			}
+		}
+		
+		return pinoCoord;
+	}
+	
 	public int rolarDados() {
 		int dado = ThreadLocalRandom.current().nextInt(1, 6 + 1);
 		return dado;
@@ -162,9 +178,7 @@ public class Tabuleiro {
 	}
 	
 	private void criaCaminhoColorido(){
-		
-		
-		
+		// TO-DO
 	}
 	
 	//Método que retorna o Singleton

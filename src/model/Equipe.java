@@ -20,6 +20,10 @@ public class Equipe {
 			Pino pino = new Pino(cor);
 			pinos.add(pino);
 		}
-	}	
+	}
+	
+	public List<Pino> getPinos(){
+		return pinos;
+	}
 
 }

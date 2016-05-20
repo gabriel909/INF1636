@@ -9,6 +9,7 @@ import java.util.*;
 public class Panel extends JPanel {
 
 	public List<Double[]> casasCoord = new ArrayList<Double[]>();
+	public List<Integer> pinosCoord = new ArrayList<Integer>();
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
@@ -138,6 +139,10 @@ public class Panel extends JPanel {
 			fazRetangulo(x, y, size, size, cor, g2d);
 			
 		}
+	}
+	
+	void criaPino(Graphics2D g2d) {
+		// TO-DO
 	}
 	
 	
