@@ -19,14 +19,13 @@ public class GameController {
 		List<Casa> casas = tabuleiro.getCasas();
 		
 		for(int i=0; i < casas.size(); i++) {
-			
-			
+			Casa casa = casas.get(i);
+			painel.casasCoord.add(casa.getCoord()); 
 		}
 	}
 	
 	public static int getValorDado() {
 		dado =  Dado.rolarDados();
-		
 		return dado;
 	}
 }

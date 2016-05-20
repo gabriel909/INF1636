@@ -6,10 +6,11 @@ public class Tabuleiro {
 	private static Tabuleiro tabuleiro = new Tabuleiro();
 	
 	private List<Casa> casas = new ArrayList<Casa>();
-	private float x = 0, y = 240;
-	
+	private Double x, y;
+		
 	private Tabuleiro() {
-	
+		x = 0.0;
+		y = 240.0;
 		for(int i = 0; i < 52; i++) {
 			
 			if(i > 0 && i < 3) {

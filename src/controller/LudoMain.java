@@ -9,6 +9,7 @@ public class LudoMain {
 		Tabuleiro tab = Tabuleiro.getTabuleiro();
 		GameController controller = new GameController(tab, f.getPainel());
 		
+		controller.updateView();
 		
 		f.setTitle("Ludo");
 		f.setVisible(true);

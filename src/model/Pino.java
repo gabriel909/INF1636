@@ -10,16 +10,16 @@ public class Pino {
 	public Pino(Cor cor) {
 		this.cor = cor;
 		if(cor == Cor.Verde) {
-			casaDeSaida = 0;
+			casaDeSaida = 51;
 		}
 		if(cor == Cor.Amarelo) {
-			casaDeSaida = 13;
+			casaDeSaida = 12;
 		}		
 		if(cor == Cor.Azul) {
-			casaDeSaida = 26;
+			casaDeSaida = 25;
 		}
 		if(cor == Cor.Vermelho) {
-			casaDeSaida = 39;
+			casaDeSaida = 38;
 		}
 		// temporariamente todos os pinos estaram na casa de saida
 		estaCasaInicial = false;

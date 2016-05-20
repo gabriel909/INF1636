@@ -4,15 +4,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import java.awt.geom.*;
+import java.util.*;
 
 public class Panel extends JPanel {
 
+	public List<Double[]> casasCoord = new ArrayList<Double[]>();
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
 		Graphics2D g2d = (Graphics2D) g;
-		
-		int[][] arrayPontos = {{45, 45, 75}, {245, 275, 260}};
-		fazTriangulo(arrayPontos[0], arrayPontos[1], Color.BLACK, g2d);
 		
 		int[][] arrayPontosX = {{240, 240, 300}, {360, 360, 300}, {240, 360, 300}, {240, 360, 300}};
 		int[][] arrayPontosY = {{240, 360, 300}, {240, 360, 300}, {360, 360, 300}, {240, 240, 300}};
@@ -37,92 +37,107 @@ public class Panel extends JPanel {
 		// Time Azul
 		criaPinos(410.0, 410.0, g2d);
 		
-		// Faz casas vermelhas
-		Double i;
-		for (i = 0.0; i < 240; i+= 40) {
-			fazRetangulo(240.0, i, 40.0, 40.0, Color.WHITE, g2d);
+		double size = 40.0;
+		Color cor = Color.WHITE;
+		for(int i = 0; i < casasCoord.size(); i++) {
 			
-			Color cor = Color.WHITE;
-			if (i >= 40) {
-				cor = Color.RED;
-			}
-			
-			fazRetangulo(280.0, i, 40.0, 40.0, cor, g2d);
-			
-			if (i == 40) {
-				cor = Color.RED;
-			} else {
-				cor = Color.WHITE;
-			}
-			
-			fazRetangulo(320.0, i, 40.0, 40.0, cor, g2d);
-		}
-
-		// Faz casas verdes
-		for (i = 0.0; i < 240; i+= 40) {
-			Color cor = Color.WHITE;
-			
-			if (i == 40) {
-				cor = Color.GREEN;
-				
-			} else {
-				cor = Color.WHITE;
-			}
-			
-			fazRetangulo(i, 240.0, 40.0, 40.0, cor, g2d);
-			
-			if (i >= 40) {
-				cor = Color.GREEN;
-			}
-			
-			fazRetangulo(i, 280.0, 40.0, 40.0, cor, g2d);
-			
-			fazRetangulo(i, 320.0, 40.0, 40.0, Color.WHITE, g2d);
+			Double[] coord = casasCoord.get(i);
+			double x = coord[0];
+			double y = coord[1];
+			fazRetangulo(x, y, size, size, cor, g2d);
 			
 		}
 		
-		// Faz casas amarelas
-		for (i = 560.0; i >= 360.0; i += - 40.0) {
-			fazRetangulo(320.0, i, 40.0, 40.0, Color.WHITE, g2d);
-			
-			Color cor = Color.WHITE;
-			if (i <= 520) {
-				cor = Color.YELLOW;
-			}
-			
-			fazRetangulo(280.0, i, 40.0, 40.0, cor, g2d);
-			
-			if (i == 520) {
-				cor = Color.YELLOW;
-			} else {
-				cor = Color.WHITE;
-			}
-			
-			fazRetangulo(240.0, i, 40.0, 40.0, cor, g2d);
-		}
+//		// Faz casas vermelhas
+//		Double i;
+//		for (i = 0.0; i < 240; i+= 40) {
+//			fazRetangulo(240.0, i, 40.0, 40.0, Color.WHITE, g2d);
+//			
+//			Color cor = Color.WHITE;
+//			if (i >= 40) {
+//				cor = Color.RED;
+//			}
+//			
+//			fazRetangulo(280.0, i, 40.0, 40.0, cor, g2d);
+//			
+//			if (i == 40) {
+//				cor = Color.RED;
+//			} else {
+//				cor = Color.WHITE;
+//			}
+//			
+//			fazRetangulo(320.0, i, 40.0, 40.0, cor, g2d);
+//		}
+//
+//		// Faz casas verdes
+//		for (i = 0.0; i < 240; i+= 40) {
+//			Color cor = Color.WHITE;
+//			
+//			if (i == 40) {
+//				cor = Color.GREEN;
+//				
+//			} else {
+//				cor = Color.WHITE;
+//			}
+//			
+//			fazRetangulo(i, 240.0, 40.0, 40.0, cor, g2d);
+//			
+//			if (i >= 40) {
+//				cor = Color.GREEN;
+//			}
+//			
+//			fazRetangulo(i, 280.0, 40.0, 40.0, cor, g2d);
+//			
+//			fazRetangulo(i, 320.0, 40.0, 40.0, Color.WHITE, g2d);
+//			
+//		}
+//		
+//		// Faz casas amarelas
+//		for (i = 560.0; i >= 360.0; i += - 40.0) {
+//			fazRetangulo(320.0, i, 40.0, 40.0, Color.WHITE, g2d);
+//			
+//			Color cor = Color.WHITE;
+//			if (i <= 520) {
+//				cor = Color.YELLOW;
+//			}
+//			
+//			fazRetangulo(280.0, i, 40.0, 40.0, cor, g2d);
+//			
+//			if (i == 520) {
+//				cor = Color.YELLOW;
+//			} else {
+//				cor = Color.WHITE;
+//			}
+//			
+//			fazRetangulo(240.0, i, 40.0, 40.0, cor, g2d);
+//		}
+//		
+//		// Faz casas azuis
+//		for (i = 360.0; i < 600; i+= 40) {
+//			Color cor = Color.WHITE;
+//			
+//			if (i == 520) {
+//				cor = Color.BLUE;
+//			} else {
+//				cor = Color.WHITE;
+//			}
+//			
+//			fazRetangulo(i, 320.0, 40.0, 40.0, cor, g2d);
+//			
+//			if (i <= 520) {
+//				cor = Color.BLUE;
+//			}
+//			
+//			fazRetangulo(i, 280.0, 40.0, 40.0, cor, g2d);
+//			
+//			fazRetangulo(i, 240.0, 40.0, 40.0, Color.WHITE, g2d);
+//			
+//		}
 		
-		// Faz casas azuis
-		for (i = 360.0; i < 600; i+= 40) {
-			Color cor = Color.WHITE;
-			
-			if (i == 520) {
-				cor = Color.BLUE;
-			} else {
-				cor = Color.WHITE;
-			}
-			
-			fazRetangulo(i, 320.0, 40.0, 40.0, cor, g2d);
-			
-			if (i <= 520) {
-				cor = Color.BLUE;
-			}
-			
-			fazRetangulo(i, 280.0, 40.0, 40.0, cor, g2d);
-			
-			fazRetangulo(i, 240.0, 40.0, 40.0, Color.WHITE, g2d);
-			
-		}
+		int[][] arrayPontos = {{45, 45, 75}, {245, 275, 260}};
+		fazTriangulo(arrayPontos[0], arrayPontos[1], Color.BLACK, g2d);
 	}
+	
 	
 	void fazRetangulo(Double left, Double top, Double larg, Double alt, Color cor, Graphics2D g2d) {
 		Rectangle2D rt = new Rectangle2D.Double(left, top, larg, alt);

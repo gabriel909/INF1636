@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Casa {
 	
-	private float x, y;
+	private Double x, y;
 	private List<Pino> pinos = new ArrayList<Pino>();
 	
-	public Casa(float x, float y) {
+	public Casa(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -33,6 +33,11 @@ public class Casa {
 		} else {
 			return false;
 		}
+	}
+	
+	public Double[] getCoord() {
+		Double[] coord = {x,y};
+		return coord;
 	}
 
 }
