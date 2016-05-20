@@ -134,8 +134,7 @@ public class Panel extends JPanel {
 //			
 //		}
 		
-		int[][] arrayPontos = {{45, 45, 75}, {245, 275, 260}};
-		fazTriangulo(arrayPontos[0], arrayPontos[1], Color.BLACK, g2d);
+		fazSetaCasaSaida(g2d);
 	}
 	
 	
@@ -169,5 +168,11 @@ public class Panel extends JPanel {
 		g2d.fillPolygon(arrayPontosX, arrayPontosY, 3);
 	}
 	
-	
+	void fazSetaCasaSaida(Graphics2D g2d) {
+		int[][] arrayPontos = {{75, 75, 45}, {245, 275, 260}, {325, 355, 340}, {75, 75, 45}, {525, 525, 555}, {325, 355, 340}, {245, 275, 260}, {525, 525, 555}};
+		fazTriangulo(arrayPontos[0], arrayPontos[1], Color.WHITE, g2d);
+		fazTriangulo(arrayPontos[2], arrayPontos[3], Color.WHITE, g2d);
+		fazTriangulo(arrayPontos[4], arrayPontos[5], Color.WHITE, g2d);
+		fazTriangulo(arrayPontos[6], arrayPontos[7], Color.WHITE, g2d);
+	}
 }
