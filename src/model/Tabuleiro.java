@@ -21,7 +21,12 @@ public class Tabuleiro {
 				x += 40;
 			}
 			
-			if(i > 7 && i < 14) {
+			if(i == 8) {
+				x += 40;
+				y += 40;
+			}
+			
+			if( i > 8 && i < 14 ) {
 				y += 40;
 			}
 			
@@ -33,7 +38,12 @@ public class Tabuleiro {
 				y -= 40;
 			}
 			
-			if (i > 20 && i < 27) {
+			if (i == 21) {
+				x += 40;
+				y -= 40;
+			}
+			
+			if (i > 21 && i < 27) {
 				x += 40;
 			}
 			
@@ -45,7 +55,12 @@ public class Tabuleiro {
 				x -= 40;
 			}
 			
-			if (i > 33 && i < 40) {
+			if (i == 34) {
+				x -= 40;
+				y -= 40;
+			}
+			
+			if (i > 34 && i < 40) {
 				y -= 40;
 			}
 			
@@ -57,7 +72,12 @@ public class Tabuleiro {
 				 y += 40;
 			 }
 			 
-			 if (i > 46 && i < 52) {
+			 if (i == 47) {
+				 x -= 40;
+				 y += 40;
+			 }
+			 
+			 if (i > 47 && i < 52) {
 				 x -= 40;
 			 }
 			 
