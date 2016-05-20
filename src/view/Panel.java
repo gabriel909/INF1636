@@ -13,41 +13,21 @@ public class Panel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
 		Graphics2D g2d = (Graphics2D) g;
-		
-		int[][] arrayPontosX = {{240, 240, 300}, {360, 360, 300}, {240, 360, 300}, {240, 360, 300}};
-		int[][] arrayPontosY = {{240, 360, 300}, {240, 360, 300}, {360, 360, 300}, {240, 240, 300}};
-		
-		fazTriangulo(arrayPontosX[0], arrayPontosY[0], Color.GREEN, g2d);
-		fazTriangulo(arrayPontosX[1], arrayPontosY[1], Color.BLUE, g2d);
-		fazTriangulo(arrayPontosX[2], arrayPontosY[2], Color.YELLOW, g2d);
-		fazTriangulo(arrayPontosX[3], arrayPontosY[3], Color.RED, g2d);
-		
-		// Faz os quadrados maiores
-		fazRetangulo(0.0, 0.0, 240.0, 240.0, Color.GREEN, g2d);
-		fazRetangulo(360.0, 0.0, 240.0, 240.0, Color.RED, g2d);
-		fazRetangulo(0.0, 360.0, 240.0, 240.0, Color.YELLOW, g2d);
-		fazRetangulo(360.0, 360.0, 240.0, 240.0, Color.BLUE, g2d);
+
+		fazCasaFinal(g2d);
+		fazCasaInicial(g2d);
 		
 		// Time Verde
-		criaPinos(50.0, 50.0, g2d);
+		criaEspaçoPinos(50.0, 50.0, g2d);
 		// Time Vermelho
-		criaPinos(410.0, 50.0, g2d);
+		criaEspaçoPinos(410.0, 50.0, g2d);
 		// Time Amarelo
-		criaPinos(50.0, 410.0, g2d);
+		criaEspaçoPinos(50.0, 410.0, g2d);
 		// Time Azul
-		criaPinos(410.0, 410.0, g2d);
+		criaEspaçoPinos(410.0, 410.0, g2d);
 		
-		double size = 40.0;
-		Color cor = Color.WHITE;
-		for(int i = 0; i < casasCoord.size(); i++) {
-			
-			Double[] coord = casasCoord.get(i);
-			double x = coord[0];
-			double y = coord[1];
-			fazRetangulo(x, y, size, size, cor, g2d);
-			
-		}
-		
+		fazCaminhoBranco(g2d);
+
 //		// Faz casas vermelhas
 //		Double i;
 //		for (i = 0.0; i < 240; i+= 40) {
@@ -137,6 +117,22 @@ public class Panel extends JPanel {
 		fazSetaCasaSaida(g2d);
 	}
 	
+	void fazCaminhoBranco(Graphics2D g2d) {
+		double size = 40.0;
+		Color cor = Color.WHITE;
+		for(int i = 0; i < casasCoord.size(); i++) {
+			
+			Double[] coord = casasCoord.get(i);
+			double x = coord[0];
+			double y = coord[1];
+			fazRetangulo(x, y, size, size, cor, g2d);
+			
+		}
+	}
+	
+	void fazPino(){
+		
+	}
 	
 	void fazRetangulo(Double left, Double top, Double larg, Double alt, Color cor, Graphics2D g2d) {
 		Rectangle2D rt = new Rectangle2D.Double(left, top, larg, alt);
@@ -154,7 +150,7 @@ public class Panel extends JPanel {
 		g2d.fill(e);
 	}
 	
-	void criaPinos(Double origemX, Double origemY, Graphics2D g2d) {
+	void criaEspaçoPinos(Double origemX, Double origemY, Graphics2D g2d) {
 		fazCirculo(origemX, origemY, 35.0, 35.0, Color.WHITE, g2d);
 		fazCirculo(origemX + 100, origemY, 35.0, 35.0, Color.WHITE, g2d);
 		fazCirculo(origemX, origemY + 100, 35.0, 35.0, Color.WHITE, g2d);
@@ -174,5 +170,21 @@ public class Panel extends JPanel {
 		fazTriangulo(arrayPontos[2], arrayPontos[3], Color.WHITE, g2d);
 		fazTriangulo(arrayPontos[4], arrayPontos[5], Color.WHITE, g2d);
 		fazTriangulo(arrayPontos[6], arrayPontos[7], Color.WHITE, g2d);
+
+	void fazCasaFinal(Graphics2D g2d) {
+		int[][] arrayPontosX = {{240, 240, 300}, {360, 360, 300}, {240, 360, 300}, {240, 360, 300}};
+		int[][] arrayPontosY = {{240, 360, 300}, {240, 360, 300}, {360, 360, 300}, {240, 240, 300}};
+		
+		fazTriangulo(arrayPontosX[0], arrayPontosY[0], Color.GREEN, g2d);
+		fazTriangulo(arrayPontosX[1], arrayPontosY[1], Color.BLUE, g2d);
+		fazTriangulo(arrayPontosX[2], arrayPontosY[2], Color.YELLOW, g2d);
+		fazTriangulo(arrayPontosX[3], arrayPontosY[3], Color.RED, g2d);
+	}
+	
+	void fazCasaInicial(Graphics2D g2d) {
+		fazRetangulo(0.0, 0.0, 240.0, 240.0, Color.GREEN, g2d);
+		fazRetangulo(360.0, 0.0, 240.0, 240.0, Color.RED, g2d);
+		fazRetangulo(0.0, 360.0, 240.0, 240.0, Color.YELLOW, g2d);
+		fazRetangulo(360.0, 360.0, 240.0, 240.0, Color.BLUE, g2d);
 	}
 }
