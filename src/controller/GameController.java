@@ -24,7 +24,6 @@ public class GameController {
 			
 		}
 	}
-
 	
 	public static int getValorDado() {
 		dado =  Dado.rolarDados();

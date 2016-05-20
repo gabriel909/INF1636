@@ -1,6 +1,6 @@
 package controller;
 
-import model.Tabuleiro;
+import model.*;
 import view.Frame;
 
 public class LudoMain {
@@ -8,7 +8,7 @@ public class LudoMain {
 		Frame f = new Frame();
 		Tabuleiro tab = Tabuleiro.getTabuleiro();
 		GameController controller = new GameController(tab, f.getPainel());
-		
+
 		controller.updateView();
 		
 		f.setTitle("Ludo");

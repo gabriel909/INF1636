@@ -9,17 +9,17 @@ import controller.GameController;
 public class Frame extends JFrame {
 	
 	Panel p = new Panel();
+	JButton b1;
+	JLabel label;
 	
 	public Frame() {
-		JButton b1 = new JButton("Dado");
-		JLabel label = new JLabel();
+		b1 = new JButton("Dado");
+		label = new JLabel();
 		
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int dado = GameController.getValorDado();
-	
 				label.setText(Integer.toString(dado));
-				
 			}
 		});
 		
@@ -36,7 +36,6 @@ public class Frame extends JFrame {
 		b1.setBounds(650, 300, 100, 50);
 		
 	}
-	
 	// get painel
 	public Panel getPainel() {
 		return p;
