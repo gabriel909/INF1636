@@ -1,21 +1,29 @@
 package model;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Tabuleiro {
 	private static Tabuleiro tabuleiro = new Tabuleiro();
 	
 	private List<Casa> casas = new ArrayList<Casa>();
 	private List<Casa[]> casasColoridas = new ArrayList<Casa[]>();
+	private List<Equipe> equipes = new ArrayList<Equipe>();
 	private Double x, y;
 		
 	private Tabuleiro() {
 		criaCaminhoBranco();
+		criaEquipes();
 	}
 	
 	// Get Casas
 	public List<Casa> getCasas() {
 		return casas;
+	}
+	
+	public int rolarDados() {
+		int dado = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+		return dado;
 	}
 	
 	/*
@@ -62,6 +70,17 @@ public class Tabuleiro {
 			return false;
 		}
 	
+	}
+	
+	private void criaEquipes() {
+		Equipe equipeAzul = new Equipe(Cor.Azul);
+		Equipe equipeAmarelo = new Equipe(Cor.Amarelo);
+		Equipe equipeVerde = new Equipe(Cor.Verde);
+		Equipe equipeVermelho = new Equipe(Cor.Vermelho);
+		equipes.add(equipeAmarelo);
+		equipes.add(equipeAzul);
+		equipes.add(equipeVerde);
+		equipes.add(equipeVermelho);
 	}
 	
 	private void criaCaminhoBranco() {

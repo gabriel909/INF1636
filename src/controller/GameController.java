@@ -5,12 +5,11 @@ import model.*;
 import java.util.*;
 
 public class GameController {
-	Tabuleiro tabuleiro;
+	static Tabuleiro tabuleiro = Tabuleiro.getTabuleiro();
 	Panel painel;
 	static int dado;
 	
-	public GameController(Tabuleiro tab, Panel panel) {
-		this.tabuleiro = tab;
+	public GameController(Panel panel) {
 		this.painel = panel;
 	}
 	
@@ -26,7 +25,7 @@ public class GameController {
 	}
 	
 	public static int getValorDado() {
-		dado =  Dado.rolarDados();
+		dado =  tabuleiro.rolarDados();
 		return dado;
 	}
 }
