@@ -105,33 +105,33 @@ public class Tabuleiro {
 		for(int i = 0; i < 52; i++) {
 			
 			if(i > 0 && i < 3) {
-				y += 40;
+				y += 40.0;
 			}
 			
 			if(i > 2 && i < 8) {
-				x += 40;
+				x += 40.0;
 			}
 			
 			if(i == 8) {
-				x += 40;
-				y += 40;
+				x += 40.0;
+				y += 40.0;
 			}
 			
 			if( i > 8 && i < 14 ) {
-				y += 40;
+				y += 40.0;
 			}
 			
 			if (i > 13 && i < 16) {
-				x += 40;
+				x += 40.0;
 			}
 			
 			if  (i > 15 && i < 21) {
-				y -= 40;
+				y -= 40.0;
 			}
 			
 			if (i == 21) {
-				x += 40;
-				y -= 40;
+				x += 40.0;
+				y -= 40.0;
 			}
 			
 			if (i > 21 && i < 27) {
@@ -139,16 +139,16 @@ public class Tabuleiro {
 			}
 			
 			if (i > 26 && i < 29) {
-				y -= 40;
+				y -= 40.0;
 			}
 			
 			if (i > 28 && i < 34) {
-				x -= 40;
+				x -= 40.0;
 			}
 			
 			if (i == 34) {
-				x -= 40;
-				y -= 40;
+				x -= 40.0;
+				y -= 40.0;
 			}
 			
 			if (i > 34 && i < 40) {
@@ -156,20 +156,20 @@ public class Tabuleiro {
 			}
 			
 			 if (i > 39 && i < 42) {
-				 x -= 40; 
+				 x -= 40.0; 
 			 }
 			
 			 if (i > 41 && i < 47) {
-				 y += 40;
+				 y += 40.0;
 			 }
 			 
 			 if (i == 47) {
-				 x -= 40;
-				 y += 40;
+				 x -= 40.0;
+				 y += 40.0;
 			 }
 			 
 			 if (i > 47 && i < 52) {
-				 x -= 40;
+				 x -= 40.0;
 			 }
 			 
 			Casa casa = new Casa(x, y,Cor.Branco);
@@ -178,7 +178,35 @@ public class Tabuleiro {
 	}
 	
 	private void criaCaminhoColorido(){
-		// TO-DO
+		Double coordAdd = 0.0, coordSub = 520.0;
+		
+		for(int i = 0; i < 4; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(i == 0) {
+					coordAdd += 40.0;
+					Casa casa = new Casa(coordAdd, 280.0, Cor.Verde);
+					casasColoridas.get(i)[j] = casa;
+				}
+				
+				if(i == 1) {
+					coordSub -= 40.0;
+					Casa casa = new Casa(280.0, coordSub, Cor.Amarelo);
+					casasColoridas.get(i)[j] = casa;
+				}
+				
+				if(i == 2) {
+					coordSub -= 40.0;
+					Casa casa = new Casa(coordSub, 280.0, Cor.Azul);
+					casasColoridas.get(i)[j] = casa;
+				}
+				
+				if(i == 3) {
+					coordAdd += 40.0;
+					Casa casa = new Casa(280.0, coordAdd, Cor.Vermelho);
+					casasColoridas.get(i)[j] = casa;
+				}
+			}
+		}
 	}
 	
 	//Método que retorna o Singleton
