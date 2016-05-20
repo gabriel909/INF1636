@@ -119,8 +119,18 @@ public class Panel extends JPanel {
 	
 	void fazCaminhoBranco(Graphics2D g2d) {
 		double size = 40.0;
-		Color cor = Color.WHITE;
+		Color cor;
 		for(int i = 0; i < casasCoord.size(); i++) {
+			cor = Color.WHITE;
+			if (i == 51) {
+				cor = Color.GREEN;
+			} else if(i == 12) {
+				cor = Color.YELLOW;
+			} else if(i == 25) {
+				cor = Color.BLUE;
+			} else if(i == 38) {
+				cor = Color.RED;
+			}
 			
 			Double[] coord = casasCoord.get(i);
 			double x = coord[0];
@@ -170,6 +180,7 @@ public class Panel extends JPanel {
 		fazTriangulo(arrayPontos[2], arrayPontos[3], Color.WHITE, g2d);
 		fazTriangulo(arrayPontos[4], arrayPontos[5], Color.WHITE, g2d);
 		fazTriangulo(arrayPontos[6], arrayPontos[7], Color.WHITE, g2d);
+	}
 
 	void fazCasaFinal(Graphics2D g2d) {
 		int[][] arrayPontosX = {{240, 240, 300}, {360, 360, 300}, {240, 360, 300}, {240, 360, 300}};
