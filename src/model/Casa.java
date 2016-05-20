@@ -6,11 +6,15 @@ public class Casa {
 	
 	private Double x, y;
 	private List<Pino> pinos = new ArrayList<Pino>();
+	private Cor cor;
 	
-	public Casa(double x, double y) {
+	public Casa(double x, double y, Cor cor) {
 		this.x = x;
 		this.y = y;
+		this.cor = cor;
 	}
+	
+	
 	
 	/*
 	 * Método que retorna os pinos que estão nesta casa

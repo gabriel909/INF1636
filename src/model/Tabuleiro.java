@@ -6,9 +6,65 @@ public class Tabuleiro {
 	private static Tabuleiro tabuleiro = new Tabuleiro();
 	
 	private List<Casa> casas = new ArrayList<Casa>();
+	private List<Casa[]> casasColoridas = new ArrayList<Casa[]>();
 	private Double x, y;
 		
 	private Tabuleiro() {
+		criaCaminhoBranco();
+	}
+	
+	// Get Casas
+	public List<Casa> getCasas() {
+		return casas;
+	}
+	
+	/*
+	 * Método que movimenta os pinos
+	 * 
+	 * Parametros ( Pino que vai se movimentar e o valor do dado )
+	 * checar se no caminho até a casa destino existe uma barreira
+	 * Se existir para na casa imediatamente antes da barreira
+	 * checar se na casa destino tem um pino adversario
+	 * se existir, esse pino retorna para o inicio e o pino em movimento chega na casa destino
+	 * 
+	 */
+	public boolean movimentaPinos(Pino pinoEmMovimento, int valorDado) {
+		
+//		if(pinoEmMovimento.estaCasaInicial == false) {
+//			int casaInicioPino = pinoEmMovimento.casaAtual, casaDestino = casas.size();
+//			for(int i = casaInicioPino; i < casaDestino; i++) {
+//				Casa casa = casas.get(i);
+//				List<Pino> pinos = casa.getPinos();
+//				if(pinos.size() == 2 || pinoEmMovimento.estaCasaInicial == true) {
+//
+//				}
+//				if(pinos.size() == 2 || pinoEmMovimento.estaCasaInicial == true) {
+//
+//				}
+//
+//			}
+//		} else {
+//			Casa casa = casas.get(pinoEmMovimento.getNumeroCasaDeSaida());
+//			List<Pino> pinos = casa.getPinos();
+//			if(valorDado == 5) {
+//				
+//				
+//			}
+//		}
+//		return false;
+		
+		int casaDestino = pinoEmMovimento.casaAtual + valorDado;
+		boolean conseguiuMover = casas.get(casaDestino).adicionaPino(pinoEmMovimento);
+		if(conseguiuMover) {
+			pinoEmMovimento.casaAtual = casaDestino;
+			return true;
+		} else {
+			return false;
+		}
+	
+	}
+	
+	private void criaCaminhoBranco() {
 		x = 0.0;
 		y = 240.0;
 		for(int i = 0; i < 52; i++) {
@@ -81,62 +137,18 @@ public class Tabuleiro {
 				 x -= 40;
 			 }
 			 
-			Casa casa = new Casa(x, y);
+			Casa casa = new Casa(x, y,Cor.Branco);
 			casas.add(casa);
 		}
 	}
 	
-	// Get Casas
-	public List<Casa> getCasas() {
-		return casas;
+	private void criaCaminhoColorido(){
+		
+		
+		
 	}
 	
-	/*
-	 * Método que movimenta os pinos
-	 * 
-	 * Parametros ( Pino que vai se movimentar e o valor do dado )
-	 * checar se no caminho até a casa destino existe uma barreira
-	 * Se existir para na casa imediatamente antes da barreira
-	 * checar se na casa destino tem um pino adversario
-	 * se existir, esse pino retorna para o inicio e o pino em movimento chega na casa destino
-	 * 
-	 */
-	public boolean movimentaPinos(Pino pinoEmMovimento, int valorDado) {
-		
-//		if(pinoEmMovimento.estaCasaInicial == false) {
-//			int casaInicioPino = pinoEmMovimento.casaAtual, casaDestino = casas.size();
-//			for(int i = casaInicioPino; i < casaDestino; i++) {
-//				Casa casa = casas.get(i);
-//				List<Pino> pinos = casa.getPinos();
-//				if(pinos.size() == 2 || pinoEmMovimento.estaCasaInicial == true) {
-//
-//				}
-//				if(pinos.size() == 2 || pinoEmMovimento.estaCasaInicial == true) {
-//
-//				}
-//
-//			}
-//		} else {
-//			Casa casa = casas.get(pinoEmMovimento.getNumeroCasaDeSaida());
-//			List<Pino> pinos = casa.getPinos();
-//			if(valorDado == 5) {
-//				
-//				
-//			}
-//		}
-//		return false;
-		
-		int casaDestino = pinoEmMovimento.casaAtual + valorDado;
-		boolean conseguiuMover = casas.get(casaDestino).adicionaPino(pinoEmMovimento);
-		if(conseguiuMover) {
-			pinoEmMovimento.casaAtual = casaDestino;
-			return true;
-		} else {
-			return false;
-		}
-	
-	}
-	
+	//Método que retorna o Singleton
 	public static Tabuleiro getTabuleiro() {
 		return tabuleiro;
 	}

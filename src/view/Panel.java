@@ -130,9 +130,6 @@ public class Panel extends JPanel {
 		}
 	}
 	
-	void fazPino(){
-		
-	}
 	
 	void fazRetangulo(Double left, Double top, Double larg, Double alt, Color cor, Graphics2D g2d) {
 		Rectangle2D rt = new Rectangle2D.Double(left, top, larg, alt);
