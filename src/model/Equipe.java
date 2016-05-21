@@ -4,12 +4,13 @@ import java.util.*;;
 
 public class Equipe {
 	
-	private List<Pino> pinos;
+	protected List<Pino> pinos;
 	private Cor cor;
 	private int qtdPinosCasaFinal;
 	
 	public Equipe(Cor cor) {
 		this.cor = cor;
+		qtdPinosCasaFinal = 0;
 		criaPinos(cor);
 		
 	}

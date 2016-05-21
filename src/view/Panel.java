@@ -2,9 +2,10 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
 import javax.swing.JPanel;
 
-import model.Casa;
+//import model.Casa;
 
 import java.awt.geom.*;
 import java.util.*;
@@ -32,6 +33,8 @@ public class Panel extends JPanel {
 		
 		fazCaminhoBranco(g2d);
 		fazCaminhoColorido(g2d);
+		
+		
 
 //		// Faz casas vermelhas
 //		Double i;
@@ -120,6 +123,7 @@ public class Panel extends JPanel {
 //		}
 		
 		fazSetaCasaSaida(g2d);
+		criaPino(g2d);
 	}
 	
 	void fazCaminhoBranco(Graphics2D g2d) {
@@ -182,6 +186,27 @@ public class Panel extends JPanel {
 	
 	void criaPino(Graphics2D g2d) {
 		// TO-DO
+		int j;
+		Double[] coord;
+		double y,x, raio = 35.0;
+		for(int i = 0; i < pinosCoord.size(); i++) {
+			j = pinosCoord.get(i);
+			coord = casasCoord.get(j);
+			y = coord[0];
+			x = coord[1];
+			if(i < 4) {
+				fazCirculo(y, x, raio, raio, Color.YELLOW, g2d);
+			}
+			if(i > 3 && i < 8) {
+				fazCirculo(y, x, raio, raio, Color.BLUE, g2d);
+			}
+			if(i > 7 && i < 12) {
+				fazCirculo(y, x, raio, raio, Color.GREEN, g2d);
+			}
+			if(i > 11 && i < 16) {
+				fazCirculo(y, x, raio, raio, Color.RED, g2d);
+			}
+		}
 	}
 	
 	
@@ -197,7 +222,7 @@ public class Panel extends JPanel {
 		Ellipse2D e = new Ellipse2D.Double(left, top, larg, alt);
 		g2d.setPaint(Color.BLACK);
 		g2d.draw(e);
-		g2d.setPaint(Color.WHITE);
+		g2d.setPaint(cor);
 		g2d.fill(e);
 	}
 	

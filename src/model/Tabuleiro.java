@@ -58,8 +58,8 @@ public class Tabuleiro {
 	 * se existir, esse pino retorna para o inicio e o pino em movimento chega na casa destino
 	 * 
 	 */
-	public boolean movimentaPinos(Pino pinoEmMovimento, int valorDado) {
-		
+	//public boolean movimentaPinos(Pino pinoEmMovimento, int valorDado) {
+	public void movimentaPinos(int valorDado) {	
 //		if(pinoEmMovimento.estaCasaInicial == false) {
 //			int casaInicioPino = pinoEmMovimento.casaAtual, casaDestino = casas.size();
 //			for(int i = casaInicioPino; i < casaDestino; i++) {
@@ -83,15 +83,25 @@ public class Tabuleiro {
 //		}
 //		return false;
 		
-		int casaDestino = pinoEmMovimento.casaAtual + valorDado;
-		boolean conseguiuMover = casas.get(casaDestino).adicionaPino(pinoEmMovimento);
-		if(conseguiuMover) {
-			pinoEmMovimento.casaAtual = casaDestino;
-			return true;
-		} else {
-			return false;
+//		int casaDestino = pinoEmMovimento.casaAtual + valorDado;
+//		boolean conseguiuMover = casas.get(casaDestino).adicionaPino(pinoEmMovimento);
+//		if(conseguiuMover) {
+//			pinoEmMovimento.casaAtual = casaDestino;
+//			return true;
+//		} else {
+//			return false;
+//		}
+		Equipe equipe;
+		Pino pino;
+		for(int i = 0; i < equipes.size(); i++) {
+			equipe = equipes.get(i);
+			for(int j = 0; j < equipe.pinos.size(); j++) {
+				pino = equipe.pinos.get(j);
+				pino.casaAtual = pino.casaAtual + valorDado;
+				System.out.println(equipe.pinos.get(j).casaAtual);
+			}
 		}
-	
+		
 	}
 	
 	private void criaEquipes() {
