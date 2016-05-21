@@ -17,12 +17,12 @@ public class GameController {
 	public void updateView() {
 		List<Casa> casas = tabuleiro.getCasas();
 		painel.pinosCoord = tabuleiro.getPinoCoords();
+		
 		for(int i=0; i < casas.size(); i++) {
 			Casa casa = casas.get(i);
 			painel.casasCoord.add(casa.getCoord());
 			
 		}
-	
 	}
 	
 	public static int getValorDado() {

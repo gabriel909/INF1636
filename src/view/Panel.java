@@ -3,6 +3,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
+
+import model.Casa;
+
 import java.awt.geom.*;
 import java.util.*;
 
@@ -28,6 +31,7 @@ public class Panel extends JPanel {
 		criaEspaçoPinos(410.0, 410.0, g2d);
 		
 		fazCaminhoBranco(g2d);
+		fazCaminhoColorido(g2d);
 
 //		// Faz casas vermelhas
 //		Double i;
@@ -121,16 +125,21 @@ public class Panel extends JPanel {
 	void fazCaminhoBranco(Graphics2D g2d) {
 		double size = 40.0;
 		Color cor;
+		
 		for(int i = 0; i < casasCoord.size(); i++) {
 			cor = Color.WHITE;
 			if (i == 51) {
 				cor = Color.GREEN;
+				
 			} else if(i == 12) {
 				cor = Color.YELLOW;
+				
 			} else if(i == 25) {
 				cor = Color.BLUE;
+				
 			} else if(i == 38) {
 				cor = Color.RED;
+				
 			}
 			
 			Double[] coord = casasCoord.get(i);
@@ -138,6 +147,36 @@ public class Panel extends JPanel {
 			double y = coord[1];
 			fazRetangulo(x, y, size, size, cor, g2d);
 			
+		}
+	}
+	
+	void fazCaminhoColorido(Graphics2D g2d) {
+		double size = 40.0;
+		
+		for(int i = 0; i < 4; i++) {
+			double coordAdd = 0.0, coordSub = 560.0;
+			
+			for(int j = 0; j < 5; j++) {
+				if(i == 0) {
+					coordAdd += 40.0;
+					fazRetangulo(coordAdd, 280.0, size, size, Color.GREEN, g2d);
+				}
+				
+				if(i == 1) {
+					coordSub -= 40.0;
+					fazRetangulo(280.0, coordSub, size, size, Color.YELLOW, g2d);
+				}
+				
+				if(i == 2) {
+					coordSub -= 40.0;
+					fazRetangulo(coordSub, 280.0, size, size, Color.BLUE, g2d);
+				}
+				
+				if(i == 3) {
+					coordAdd += 40.0;
+					fazRetangulo(280.0, coordAdd, size, size, Color.RED, g2d);
+				}
+			}
 		}
 	}
 	

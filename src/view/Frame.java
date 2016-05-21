@@ -23,7 +23,6 @@ public class Frame extends JFrame {
 			}
 		});
 		
-//		p.setBackground(Color.BLACK);
 		p.setLayout(null);
 		label.setBounds(685, 400, 50, 50);
 		label.setFont(new Font("Arial", Font.PLAIN, 50));

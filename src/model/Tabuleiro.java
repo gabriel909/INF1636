@@ -14,11 +14,17 @@ public class Tabuleiro {
 	private Tabuleiro() {
 		criaCaminhoBranco();
 		criaEquipes();
+		criaCaminhoColorido();
 	}
 	
 	// Get Casas
 	public List<Casa> getCasas() {
 		return casas;
+	}
+	
+	// Get Casas Coloridas
+	public List<Casa[]> getCasasColoridas() {
+		return casasColoridas;
 	}
 	
 	// Get Pinos
@@ -178,34 +184,40 @@ public class Tabuleiro {
 	}
 	
 	private void criaCaminhoColorido(){
-		Double coordAdd = 0.0, coordSub = 520.0;
+		Double coordAdd = 0.0, coordSub = 560.0;
+		Casa[] arrayCasas = new Casa[6];
 		
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(i == 0) {
 					coordAdd += 40.0;
 					Casa casa = new Casa(coordAdd, 280.0, Cor.Verde);
-					casasColoridas.get(i)[j] = casa;
+					arrayCasas[j] = casa;
 				}
 				
 				if(i == 1) {
 					coordSub -= 40.0;
 					Casa casa = new Casa(280.0, coordSub, Cor.Amarelo);
-					casasColoridas.get(i)[j] = casa;
+					arrayCasas[j] = casa;
 				}
 				
 				if(i == 2) {
 					coordSub -= 40.0;
 					Casa casa = new Casa(coordSub, 280.0, Cor.Azul);
-					casasColoridas.get(i)[j] = casa;
+					arrayCasas[j] = casa;
 				}
 				
 				if(i == 3) {
 					coordAdd += 40.0;
 					Casa casa = new Casa(280.0, coordAdd, Cor.Vermelho);
-					casasColoridas.get(i)[j] = casa;
+					arrayCasas[j] = casa;
 				}
+				
+//				System.out.println(arrayCasas[j].getCoord()[0]+" "+arrayCasas[j].getCoord()[1]);
+				
 			}
+//			System.out.println(arrayCasas);
+			casasColoridas.add(arrayCasas);
 		}
 	}
 	
