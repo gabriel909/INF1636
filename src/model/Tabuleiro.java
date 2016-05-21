@@ -98,7 +98,7 @@ public class Tabuleiro {
 			for(int j = 0; j < equipe.pinos.size(); j++) {
 				pino = equipe.pinos.get(j);
 				pino.casaAtual = pino.casaAtual + valorDado;
-				System.out.println(equipe.pinos.get(j).casaAtual);
+//				System.out.println(equipe.pinos.get(j).casaAtual);
 			}
 		}
 		

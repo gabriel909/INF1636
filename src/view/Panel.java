@@ -194,6 +194,10 @@ public class Panel extends JPanel {
 			coord = casasCoord.get(j);
 			y = coord[0];
 			x = coord[1];
+			
+//			System.out.println(x+" "+y);
+//			System.out.println();
+			
 			if(i < 4) {
 				fazCirculo(y, x, raio, raio, Color.YELLOW, g2d);
 			}
@@ -207,6 +211,7 @@ public class Panel extends JPanel {
 				fazCirculo(y, x, raio, raio, Color.RED, g2d);
 			}
 		}
+//		System.out.println();
 	}
 	
 	

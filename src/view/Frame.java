@@ -18,7 +18,8 @@ public class Frame extends JFrame {
 		
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int dado = GameController.getValorDado();
+				GameController controller = new GameController(p);
+				int dado = controller.getValorDado();
 				label.setText(Integer.toString(dado));
 				getContentPane().validate();
 				getContentPane().repaint();

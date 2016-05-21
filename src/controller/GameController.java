@@ -8,10 +8,10 @@ public class GameController {
 	static Tabuleiro tabuleiro = Tabuleiro.getTabuleiro();
 	Panel painel;
 	Frame f;
-	static int dado;
+	static int dado = 0;
 	
-	public GameController(Frame f,Panel panel) {
-		this.f = f;
+	public GameController(Panel panel) {
+//		this.f = f;
 		this.painel = panel;
 	}
 	
@@ -24,13 +24,12 @@ public class GameController {
 			Casa casa = casas.get(i);
 			painel.casasCoord.add(casa.getCoord());
 		}
-		
-		f.getContentPane().repaint();
 	}
 	
-	public static int getValorDado() {
+	public int getValorDado() {
 		dado =  tabuleiro.rolarDados();
 		tabuleiro.movimentaPinos(dado);
+		updateView();
 		return dado;
 	}
 }
