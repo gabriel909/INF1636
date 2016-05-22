@@ -97,7 +97,15 @@ public class Tabuleiro {
 			equipe = equipes.get(i);
 			for(int j = 0; j < equipe.pinos.size(); j++) {
 				pino = equipe.pinos.get(j);
-				pino.casaAtual = pino.casaAtual + valorDado;
+				
+				pino.casaAtual += valorDado;
+				
+				if(pino.casaAtual >= 52) {
+					pino.casaAtual -= 52;
+				}
+				
+				System.out.println(pino.casaAtual);
+				
 //				System.out.println(equipe.pinos.get(j).casaAtual);
 			}
 		}
@@ -118,6 +126,7 @@ public class Tabuleiro {
 	private void criaCaminhoBranco() {
 		x = 0.0;
 		y = 240.0;
+		
 		for(int i = 0; i < 52; i++) {
 			
 			if(i > 0 && i < 3) {

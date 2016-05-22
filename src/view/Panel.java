@@ -130,6 +130,8 @@ public class Panel extends JPanel {
 		double size = 40.0;
 		Color cor;
 		
+		System.out.println(casasCoord.size());
+		
 		for(int i = 0; i < casasCoord.size(); i++) {
 			cor = Color.WHITE;
 			if (i == 51) {
