@@ -146,6 +146,8 @@ public class Panel extends JPanel {
 			} else if(i == 38) {
 				cor = Color.RED;
 				
+			} else if(i == 3 || i == 16 || i == 29 || i == 42) {
+				cor = Color.BLACK;
 			}
 			
 			Double[] coord = casasCoord.get(i);
@@ -197,9 +199,6 @@ public class Panel extends JPanel {
 			y = coord[0];
 			x = coord[1];
 			
-//			System.out.println(x+" "+y);
-//			System.out.println();
-			
 			if(i < 4) {
 				fazCirculo(y, x, raio, raio, Color.YELLOW, g2d);
 			}
@@ -213,7 +212,6 @@ public class Panel extends JPanel {
 				fazCirculo(y, x, raio, raio, Color.RED, g2d);
 			}
 		}
-//		System.out.println();
 	}
 	
 	

@@ -103,13 +103,8 @@ public class Tabuleiro {
 				if(pino.casaAtual >= 52) {
 					pino.casaAtual -= 52;
 				}
-				
-				System.out.println(pino.casaAtual);
-				
-//				System.out.println(equipe.pinos.get(j).casaAtual);
 			}
-		}
-		
+		}		
 	}
 	
 	private void criaEquipes() {
@@ -117,6 +112,7 @@ public class Tabuleiro {
 		Equipe equipeAmarelo = new Equipe(Cor.Amarelo);
 		Equipe equipeVerde = new Equipe(Cor.Verde);
 		Equipe equipeVermelho = new Equipe(Cor.Vermelho);
+		
 		equipes.add(equipeAmarelo);
 		equipes.add(equipeAzul);
 		equipes.add(equipeVerde);
