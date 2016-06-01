@@ -33,95 +33,6 @@ public class Panel extends JPanel {
 		
 		fazCaminhoBranco(g2d);
 		fazCaminhoColorido(g2d);
-		
-		
-
-//		// Faz casas vermelhas
-//		Double i;
-//		for (i = 0.0; i < 240; i+= 40) {
-//			fazRetangulo(240.0, i, 40.0, 40.0, Color.WHITE, g2d);
-//			
-//			Color cor = Color.WHITE;
-//			if (i >= 40) {
-//				cor = Color.RED;
-//			}
-//			
-//			fazRetangulo(280.0, i, 40.0, 40.0, cor, g2d);
-//			
-//			if (i == 40) {
-//				cor = Color.RED;
-//			} else {
-//				cor = Color.WHITE;
-//			}
-//			
-//			fazRetangulo(320.0, i, 40.0, 40.0, cor, g2d);
-//		}
-//
-//		// Faz casas verdes
-//		for (i = 0.0; i < 240; i+= 40) {
-//			Color cor = Color.WHITE;
-//			
-//			if (i == 40) {
-//				cor = Color.GREEN;
-//				
-//			} else {
-//				cor = Color.WHITE;
-//			}
-//			
-//			fazRetangulo(i, 240.0, 40.0, 40.0, cor, g2d);
-//			
-//			if (i >= 40) {
-//				cor = Color.GREEN;
-//			}
-//			
-//			fazRetangulo(i, 280.0, 40.0, 40.0, cor, g2d);
-//			
-//			fazRetangulo(i, 320.0, 40.0, 40.0, Color.WHITE, g2d);
-//			
-//		}
-//		
-//		// Faz casas amarelas
-//		for (i = 560.0; i >= 360.0; i += - 40.0) {
-//			fazRetangulo(320.0, i, 40.0, 40.0, Color.WHITE, g2d);
-//			
-//			Color cor = Color.WHITE;
-//			if (i <= 520) {
-//				cor = Color.YELLOW;
-//			}
-//			
-//			fazRetangulo(280.0, i, 40.0, 40.0, cor, g2d);
-//			
-//			if (i == 520) {
-//				cor = Color.YELLOW;
-//			} else {
-//				cor = Color.WHITE;
-//			}
-//			
-//			fazRetangulo(240.0, i, 40.0, 40.0, cor, g2d);
-//		}
-//		
-//		// Faz casas azuis
-//		for (i = 360.0; i < 600; i+= 40) {
-//			Color cor = Color.WHITE;
-//			
-//			if (i == 520) {
-//				cor = Color.BLUE;
-//			} else {
-//				cor = Color.WHITE;
-//			}
-//			
-//			fazRetangulo(i, 320.0, 40.0, 40.0, cor, g2d);
-//			
-//			if (i <= 520) {
-//				cor = Color.BLUE;
-//			}
-//			
-//			fazRetangulo(i, 280.0, 40.0, 40.0, cor, g2d);
-//			
-//			fazRetangulo(i, 240.0, 40.0, 40.0, Color.WHITE, g2d);
-//			
-//		}
-		
 		fazSetaCasaSaida(g2d);
 		criaPino(g2d);
 	}
@@ -132,7 +43,9 @@ public class Panel extends JPanel {
 		
 		System.out.println(casasCoord.size());
 		
+		
 		for(int i = 0; i < casasCoord.size(); i++) {
+			Double[] coord = casasCoord.get(i);
 			cor = Color.WHITE;
 			if (i == 51) {
 				cor = Color.GREEN;
@@ -148,9 +61,10 @@ public class Panel extends JPanel {
 				
 			} else if(i == 3 || i == 16 || i == 29 || i == 42) {
 				cor = Color.BLACK;
+				System.out.println(coord[0]+" "+coord[1]);
 			}
 			
-			Double[] coord = casasCoord.get(i);
+			
 			double x = coord[0];
 			double y = coord[1];
 			fazRetangulo(x, y, size, size, cor, g2d);
