@@ -52,9 +52,10 @@ public class Tabuleiro {
 	 * Método que movimenta os pinos
 	 * 
 	 * Parametros ( Pino que vai se movimentar e o valor do dado )
-	 * checar se no caminho até a casa destino existe uma barreira
-	 * Se existir para na casa imediatamente antes da barreira
-	 * checar se na casa destino tem um pino adversario
+	 * checar se no caminho até a casa destino existe uma barreira gabriel
+	 * checar se na casa destino tem um pino adversario guilherme
+	 * se tiver um pino adversario, esse pino é comido (caso tenha dois essa casa é uma barreira)
+	 * se for um abrigo e tiver um pino adversário, fica parado
 	 * se existir, esse pino retorna para o inicio e o pino em movimento chega na casa destino
 	 * 
 	 */
