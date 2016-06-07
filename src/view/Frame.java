@@ -30,6 +30,38 @@ public class Frame extends JFrame {
 		label.setBounds(685, 400, 50, 50);
 		label.setFont(new Font("Arial", Font.PLAIN, 50));
 		getContentPane().add(p);
+		p.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Mouse Clicked: ("+e.getX()+", "+e.getY() +")");
+				
+			}
+		});
 		p.add(label);
 		p.add(b1);
 		
