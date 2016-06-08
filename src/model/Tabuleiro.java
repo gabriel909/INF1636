@@ -60,7 +60,7 @@ public class Tabuleiro {
 	 * 
 	 */
 	//public boolean movimentaPinos(Pino pinoEmMovimento, int valorDado) {
-	public void movimentaPinos(int valorDado) {	
+	public void movimentaPinos(Pino pinoEmMovimento, int valorDado) {	
 //		if(pinoEmMovimento.estaCasaInicial == false) {
 //			int casaInicioPino = pinoEmMovimento.casaAtual, casaDestino = casas.size();
 //			for(int i = casaInicioPino; i < casaDestino; i++) {
@@ -106,6 +106,21 @@ public class Tabuleiro {
 				}
 			}
 		}		
+	}
+	
+	public Pino achaPino(double x, double y) {
+		// TO-DO
+		Casa casa;
+		Double[] coord;
+		for(int i = 0; i < casas.size(); i++) {
+			casa = casas.get(i);
+			coord = casa.getCoord();
+			if( (x >= coord[0] && x<= coord[0] + 40) && (y >= coord[0] && y <= coord[0] + 40)) {
+				return casa.getPinos().get(0);
+			}
+		}
+		
+		return null;
 	}
 	
 	private void criaEquipes() {
