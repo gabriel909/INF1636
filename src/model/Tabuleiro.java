@@ -68,7 +68,7 @@ public class Tabuleiro {
 	 * input: cor do pino em movimento e casa destino
 	 * output: false, caso não existam pinos inimigos na casaDestino e true, caso contrário
 	 */
-	private boolean checaSeCasaDestinoTemInimigo(Cor cor, Casa casaDestino) {
+	private boolean checaInimigo(Cor cor, Casa casaDestino) {
 		List<Pino> pinosCasaDestino = casaDestino.getPinos();
 		if(pinosCasaDestino == null || pinosCasaDestino.get(0).getCor() == cor) {
 			return false;
@@ -86,6 +86,7 @@ public class Tabuleiro {
 		Pino pinoComido = pinosCasaDestino.get(0);
 		pinosCasaDestino.clear();
 		pinoComido.estaCasaInicial = true;
+		
 	}
 	
 	/*
@@ -148,6 +149,14 @@ public class Tabuleiro {
 		
 		int posicaoCasaDestino = pinoEmMovimento.casaAtual + valorDado;
 		Casa casaDestino = casas.get(posicaoCasaDestino);
+		int casaAtual = pinoEmMovimento.casaAtual;
+		Cor cor = pinoEmMovimento.getCor();
+		if(!checaBarreira(posicaoCasaDestino, valorDado, casaAtual)) {
+			if(checaInimigo(cor, casaDestino) && !casaDestino.getAbrigo()) {
+				comePinoInimigo(casaDestino);
+				casaDestino.adicionaPino(pinoEmMovimento);
+			}
+		}
 		
 	}
 	
@@ -158,7 +167,7 @@ public class Tabuleiro {
 		for(int i = 0; i < casas.size(); i++) {
 			casa = casas.get(i);
 			coord = casa.getCoord();
-			if( (x >= coord[0] && x<= coord[0] + 40) && (y >= coord[0] && y <= coord[0] + 40)) {
+			if( (x >= coord[0] && x<= coord[0] + 40) && (y >= coord[1] && y <= coord[1] + 40)) {
 				return casa.getPinos().get(0);
 			}
 		}

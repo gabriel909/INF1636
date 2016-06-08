@@ -36,8 +36,10 @@ public class GameController {
 	
 	public void acessaTabuleiro(double x, double y) {
 		Pino pino = tabuleiro.achaPino(x, y);
-		tabuleiro.movimentaPinos(pino, dado);
-		updateView();
+		if(pino != null) {
+			tabuleiro.movimentaPinos(pino, dado);
+			updateView();
+		}
 	}
 	
 }
