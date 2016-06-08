@@ -30,8 +30,14 @@ public class GameController {
 	public int getValorDado() {
 		dado =  tabuleiro.rolarDados();
 //		tabuleiro.movimentaPinos(dado);
-		updateView();
+//		updateView();
 		return dado;
-	}	
+	}
+	
+	public void acessaTabuleiro(double x, double y) {
+		Pino pino = tabuleiro.achaPino(x, y);
+		tabuleiro.movimentaPinos(pino, dado);
+		updateView();
+	}
 	
 }

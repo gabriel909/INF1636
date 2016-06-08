@@ -11,6 +11,9 @@ public class Frame extends JFrame {
 	Panel p = new Panel();
 	JButton b1;
 	JLabel label;
+	GameController controller = new GameController(p);
+	boolean flagDado = false;
+
 	
 	public Frame() {
 		b1 = new JButton("Dado");
@@ -18,11 +21,13 @@ public class Frame extends JFrame {
 		
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameController controller = new GameController(p);
-				int dado = controller.getValorDado();
-				label.setText(Integer.toString(dado));
-				getContentPane().validate();
-				getContentPane().repaint();
+				if(!flagDado) {
+					int dado = controller.getValorDado();
+					label.setText(Integer.toString(dado));
+					flagDado = true;
+					//				getContentPane().validate();
+					//				getContentPane().repaint();
+				}
 			}
 		});
 		
@@ -59,8 +64,14 @@ public class Frame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Mouse Clicked: ("+e.getX()+", "+e.getY() +")");
-				
+				if(flagDado) {
+					controller.acessaTabuleiro(e.getX(), e.getY());
+					getContentPane().validate();
+					getContentPane().repaint();
+					flagDado = false;
+				}
 			}
+		
 		});
 		p.add(label);
 		p.add(b1);

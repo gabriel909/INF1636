@@ -8,7 +8,7 @@ public class Casa {
 	private List<Pino> pinos = new ArrayList<Pino>();
 	private Cor cor;
 	private boolean barreira = false;
-	private boolean abrigo;
+	private boolean abrigo = false;
 	
 	public Casa(double x, double y, Cor cor) {
 		this.x = x;
@@ -61,6 +61,10 @@ public class Casa {
 	
 	public boolean getAbrigo() {
 		return abrigo;		
+	}
+	
+	public void setAbrigo() {
+		abrigo = true;
 	}
 	
 
