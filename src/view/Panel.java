@@ -61,9 +61,7 @@ public class Panel extends JPanel {
 				
 			} else if(i == 3 || i == 16 || i == 29 || i == 42) {
 				cor = Color.BLACK;
-				System.out.println(coord[0]+" "+coord[1]);
 			}
-			
 			
 			double x = coord[0];
 			double y = coord[1];

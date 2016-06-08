@@ -48,6 +48,22 @@ public class Tabuleiro {
 		return dado;
 	}
 	
+	
+	private boolean checaBarreira(int casaDestino, int valorDado, int casaAtual) {
+		if(casas.get(casaDestino).getBarreira()) {
+			return true;
+			
+		} else {
+			for(int i = casaAtual; i <= valorDado; i++) {
+				if (casas.get(i).getBarreira()) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 	/*
 	 * Método que movimenta os pinos
 	 * 
