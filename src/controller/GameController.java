@@ -29,8 +29,9 @@ public class GameController {
 	
 	public int getValorDado() {
 		dado =  tabuleiro.rolarDados();
-		tabuleiro.movimentaPinos(dado);
+//		tabuleiro.movimentaPinos(dado);
 		updateView();
 		return dado;
-	}
+	}	
+	
 }
