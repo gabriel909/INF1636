@@ -40,10 +40,7 @@ public class Panel extends JPanel {
 	void fazCaminhoBranco(Graphics2D g2d) {
 		double size = 40.0;
 		Color cor;
-		
-		System.out.println(casasCoord.size());
-		
-		
+
 		for(int i = 0; i < casasCoord.size(); i++) {
 			Double[] coord = casasCoord.get(i);
 			cor = Color.WHITE;
@@ -107,21 +104,44 @@ public class Panel extends JPanel {
 		double y,x, raio = 35.0;
 		for(int i = 0; i < pinosCoord.size(); i++) {
 			j = pinosCoord.get(i);
-			coord = casasCoord.get(j);
-			y = coord[0];
-			x = coord[1];
+			Color cor = null;
 			
 			if(i < 4) {
-				fazCirculo(y, x, raio, raio, Color.YELLOW, g2d);
+				cor = Color.YELLOW.darker();
 			}
+			
 			if(i > 3 && i < 8) {
-				fazCirculo(y, x, raio, raio, Color.BLUE, g2d);
+				cor = Color.BLUE.darker();
 			}
+			
 			if(i > 7 && i < 12) {
-				fazCirculo(y, x, raio, raio, Color.GREEN, g2d);
+				cor = Color.GREEN.darker();
 			}
+			
 			if(i > 11 && i < 16) {
-				fazCirculo(y, x, raio, raio, Color.RED, g2d);
+				cor = Color.RED.darker();
+			}
+			
+			if(j != 60) {
+				coord = casasCoord.get(j);
+				y = coord[0] + 2.5;
+				x = coord[1] + 2.5;
+				
+				fazCirculo(y, x, raio, raio, cor, g2d);
+//			} else {
+//				
+////				criaEspaçoPinos(50.0, 50.0, g2d);
+////				// Time Vermelho
+////				criaEspaçoPinos(410.0, 50.0, g2d);
+////				// Time Amarelo
+////				criaEspaçoPinos(50.0, 410.0, g2d);
+////				// Time Azul
+////				criaEspaçoPinos(410.0, 410.0, g2d);
+//				
+//				x = 52.5;
+//				y = 412.5;
+//				
+//				fazCirculo(x, y, raio, raio, cor, g2d);
 			}
 		}
 	}
@@ -144,10 +164,10 @@ public class Panel extends JPanel {
 	}
 	
 	void criaEspaçoPinos(Double origemX, Double origemY, Graphics2D g2d) {
-		fazCirculo(origemX, origemY, 35.0, 35.0, Color.WHITE, g2d);
-		fazCirculo(origemX + 100, origemY, 35.0, 35.0, Color.WHITE, g2d);
-		fazCirculo(origemX, origemY + 100, 35.0, 35.0, Color.WHITE, g2d);
-		fazCirculo(origemX + 100, origemY + 100, 35.0, 35.0, Color.WHITE, g2d);
+		fazCirculo(origemX, origemY, 40.0, 40.0, Color.WHITE, g2d);
+		fazCirculo(origemX + 100, origemY, 40.0, 40.0, Color.WHITE, g2d);
+		fazCirculo(origemX, origemY + 100, 40.0, 40.0, Color.WHITE, g2d);
+		fazCirculo(origemX + 100, origemY + 100, 40.0, 40.0, Color.WHITE, g2d);
 	}
 	
 	void fazTriangulo(int[] arrayPontosX, int[] arrayPontosY, Color cor, Graphics2D g2d) {

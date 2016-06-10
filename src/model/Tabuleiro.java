@@ -32,11 +32,16 @@ public class Tabuleiro {
 		List<Pino> pinos;
 		Equipe equipe;
 		List<Integer> pinoCoord = new ArrayList<Integer>();
+		
 		for(int i = 0; i < equipes.size(); i++) {
 			equipe = equipes.get(i);
 			pinos = equipe.getPinos();
 			for(int j = 0; j < pinos.size(); j++) {
-				pinoCoord.add(pinos.get(j).casaAtual);
+				if(pinos.get(j).estaCasaInicial) {
+					pinoCoord.add(60);
+				} else {
+					pinoCoord.add(pinos.get(j).casaAtual);
+				}
 			}
 		}
 		
@@ -148,12 +153,21 @@ public class Tabuleiro {
 //		}
 		
 		int posicaoCasaDestino = pinoEmMovimento.casaAtual + valorDado;
+		
+		if(posicaoCasaDestino >= 52) {
+			posicaoCasaDestino -= 52;
+		}
+		
 		Casa casaDestino = casas.get(posicaoCasaDestino);
 		int casaAtual = pinoEmMovimento.casaAtual;
 		Cor cor = pinoEmMovimento.getCor();
 		if(!checaBarreira(posicaoCasaDestino, valorDado, casaAtual)) {
 			if(checaInimigo(cor, casaDestino) && !casaDestino.getAbrigo()) {
 				comePinoInimigo(casaDestino);
+				casaDestino.adicionaPino(pinoEmMovimento);
+				pinoEmMovimento.casaAtual = posicaoCasaDestino;
+			} else {
+				pinoEmMovimento.casaAtual = posicaoCasaDestino;
 				casaDestino.adicionaPino(pinoEmMovimento);
 			}
 		}
@@ -298,12 +312,15 @@ public class Tabuleiro {
 					Casa casa = new Casa(280.0, coordAdd, Cor.Vermelho);
 					arrayCasas[j] = casa;
 				}
-				
-//				System.out.println(arrayCasas[j].getCoord()[0]+" "+arrayCasas[j].getCoord()[1]);
-				
 			}
-//			System.out.println(arrayCasas);
 			casasColoridas.add(arrayCasas);
+		}
+	}
+	
+	public void setupInicial() {
+		for(int i = 0; i < equipes.size(); i++) {
+			Pino pino = equipes.get(i).getPinos().get(0);
+			casas.get(pino.casaAtual).adicionaPino(pino);
 		}
 	}
 	

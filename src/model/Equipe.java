@@ -19,6 +19,15 @@ public class Equipe {
 		pinos = new ArrayList<Pino>();
 		for(int i = 0; i < 4; i++) {
 			Pino pino = new Pino(cor);
+			
+			if(i == 0) {
+				pino.casaAtual = pino.getNumeroCasaDeSaida();
+				
+			} else {
+				pino.estaCasaInicial = true;
+				
+			}
+			
 			pinos.add(pino);
 		}
 	}

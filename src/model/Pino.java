@@ -5,7 +5,7 @@ public class Pino {
 	private Cor cor;
 	private int casaDeSaida;
 	protected int casaAtual;
-	protected boolean estaCasaInicial;
+	protected boolean estaCasaInicial = false;
 	
 	public Pino(Cor cor) {
 		this.cor = cor;
@@ -21,9 +21,6 @@ public class Pino {
 		if(cor == Cor.Vermelho) {
 			casaDeSaida = 38;
 		}
-		// temporariamente todos os pinos estaram na casa de saida
-		estaCasaInicial = false;
-		casaAtual = casaDeSaida;
 	}
 	
 	/*
@@ -36,9 +33,7 @@ public class Pino {
 	/*
 	 * Get numeroCasa
 	 */
-	public int getNumeroCasaDeSaida(){
+	public int getNumeroCasaDeSaida() {
 		return casaDeSaida;
 	}
-	
-	
 }

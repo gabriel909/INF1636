@@ -39,10 +39,12 @@ public class Casa {
 	*/
 	public boolean adicionaPino(Pino pino) {
 		if(pinos.size() < 2) {
-			pinos.add(pino);
 			if(pinos.size() == 1) {
 				barreira = true;
 			}
+			
+			pinos.add(pino);
+			
 			return true;
 		} else {
 //			barreira = true;
