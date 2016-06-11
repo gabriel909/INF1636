@@ -27,11 +27,7 @@ public class Casa {
 	 * Método que retorna os pinos que estão nesta casa
 	*/
 	public List<Pino> getPinos() {
-		if(pinos.size() > 0) {
-			return pinos;
-		} else {
-			return null;
-		}
+		return pinos;
 	}
 	
 	/*

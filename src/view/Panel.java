@@ -14,6 +14,7 @@ public class Panel extends JPanel {
 
 	public List<Double[]> casasCoord = new ArrayList<Double[]>();
 	public List<Integer> pinosCoord = new ArrayList<Integer>();
+	public List<Double[]> casasIniciaisCood = new ArrayList<Double[]>();
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
@@ -22,14 +23,17 @@ public class Panel extends JPanel {
 		fazCasaFinal(g2d);
 		fazCasaInicial(g2d);
 		
-		// Time Verde
-		criaEspaçoPinos(50.0, 50.0, g2d);
-		// Time Vermelho
-		criaEspaçoPinos(410.0, 50.0, g2d);
 		// Time Amarelo
 		criaEspaçoPinos(50.0, 410.0, g2d);
+
 		// Time Azul
 		criaEspaçoPinos(410.0, 410.0, g2d);
+
+		// Time Verde
+		criaEspaçoPinos(50.0, 50.0, g2d);
+
+		// Time Vermelho
+		criaEspaçoPinos(410.0, 50.0, g2d);
 		
 		fazCaminhoBranco(g2d);
 		fazCaminhoColorido(g2d);
@@ -98,10 +102,11 @@ public class Panel extends JPanel {
 	}
 	
 	void criaPino(Graphics2D g2d) {
-		// TO-DO
+		// TODO
 		int j;
 		Double[] coord;
-		double y,x, raio = 35.0;
+		double y, x, raio = 35.0;
+		
 		for(int i = 0; i < pinosCoord.size(); i++) {
 			j = pinosCoord.get(i);
 			Color cor = null;
@@ -128,20 +133,16 @@ public class Panel extends JPanel {
 				x = coord[1] + 2.5;
 				
 				fazCirculo(y, x, raio, raio, cor, g2d);
-//			} else {
-//				
-////				criaEspaçoPinos(50.0, 50.0, g2d);
-////				// Time Vermelho
-////				criaEspaçoPinos(410.0, 50.0, g2d);
-////				// Time Amarelo
-////				criaEspaçoPinos(50.0, 410.0, g2d);
-////				// Time Azul
-////				criaEspaçoPinos(410.0, 410.0, g2d);
-//				
-//				x = 52.5;
-//				y = 412.5;
-//				
-//				fazCirculo(x, y, raio, raio, cor, g2d);
+			} else {
+				
+				coord = casasIniciaisCood.get(i);
+//				System.out.println("coords: "+coord[0]+" "+coord[1]+" "+"casasIniciasCoord: "+casasIniciaisCood.get(i)[0]+" "+casasIniciaisCood.get(i)[1]+" i: "+i);
+				y = coord[0] + 2.5;
+				x = coord[1] + 2.5;
+				
+//				System.out.println(x+" "+y);
+				
+				fazCirculo(x, y, raio, raio, cor, g2d);
 			}
 		}
 	}
@@ -164,10 +165,27 @@ public class Panel extends JPanel {
 	}
 	
 	void criaEspaçoPinos(Double origemX, Double origemY, Graphics2D g2d) {
-		fazCirculo(origemX, origemY, 40.0, 40.0, Color.WHITE, g2d);
-		fazCirculo(origemX + 100, origemY, 40.0, 40.0, Color.WHITE, g2d);
-		fazCirculo(origemX, origemY + 100, 40.0, 40.0, Color.WHITE, g2d);
-		fazCirculo(origemX + 100, origemY + 100, 40.0, 40.0, Color.WHITE, g2d);
+		Double[] coord = {origemY, origemX};
+		fazCirculo(coord[1], coord[0], 40.0, 40.0, Color.WHITE, g2d);
+		casasIniciaisCood.add(coord);
+		
+		Double[] coord2 = {0.0, 0.0};
+		coord2[0] = origemY;
+		coord2[1] = origemX + 100;
+		fazCirculo(coord2[1], coord2[0], 40.0, 40.0, Color.WHITE, g2d);
+		casasIniciaisCood.add(coord2);
+		
+		Double[] coord3 = {0.0, 0.0};
+		coord3[0] = origemY + 100;
+		coord3[1] = origemX;
+		fazCirculo(coord3[1], coord3[0], 40.0, 40.0, Color.WHITE, g2d);
+		casasIniciaisCood.add(coord3);
+		
+		Double[] coord4 = {0.0, 0.0};
+		coord4[0] = origemY + 100;
+		coord4[1] = origemX + 100;
+		fazCirculo(coord4[1], coord4[0], 40.0, 40.0, Color.WHITE, g2d);
+		casasIniciaisCood.add(coord4);
 	}
 	
 	void fazTriangulo(int[] arrayPontosX, int[] arrayPontosY, Color cor, Graphics2D g2d) {

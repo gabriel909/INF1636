@@ -64,11 +64,13 @@ public class Frame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(flagDado) {
-					controller.acessaTabuleiro(e.getX(), e.getY());
-					controller.updateView();
-					getContentPane().validate();
-					getContentPane().repaint();
-					flagDado = false;
+					if(controller.acessaTabuleiro(e.getX(), e.getY())) {
+						controller.updateView();
+						getContentPane().validate();
+						getContentPane().repaint();
+						flagDado = false;
+					}
+					
 				}
 			}
 		

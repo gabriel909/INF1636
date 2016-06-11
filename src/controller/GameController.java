@@ -21,7 +21,7 @@ public class GameController {
 		painel.pinosCoord = tabuleiro.getPinoCoords();
 		painel.casasCoord.clear();
 		
-		for(int i=0; i < casas.size(); i++) {
+		for(int i = 0; i < casas.size(); i++) {
 			Casa casa = casas.get(i);
 			painel.casasCoord.add(casa.getCoord());
 		}
@@ -32,12 +32,16 @@ public class GameController {
 		return dado;
 	}
 	
-	public void acessaTabuleiro(double x, double y) {
+	public boolean acessaTabuleiro(double x, double y) {
 		Pino pino = tabuleiro.achaPino(x, y);
 		if(pino != null) {
 			tabuleiro.movimentaPinos(pino, dado);
 			updateView();
+			
+			return true;
 		}
+		
+		return false;
 	}
 	
 }

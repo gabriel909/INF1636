@@ -53,7 +53,10 @@ public class Tabuleiro {
 		return dado;
 	}
 	
-	
+	/* input: casa atual, casa destino e valor do dado
+	 * output: true, caso haja uma barreira na casa destino ou
+	 * no caminho entre a casa atual e a casa destino e false, caso contrário.
+	 */
 	private boolean checaBarreira(int casaDestino, int valorDado, int casaAtual) {
 		if(casas.get(casaDestino).getBarreira()) {
 			return true;
@@ -75,7 +78,7 @@ public class Tabuleiro {
 	 */
 	private boolean checaInimigo(Cor cor, Casa casaDestino) {
 		List<Pino> pinosCasaDestino = casaDestino.getPinos();
-		if(pinosCasaDestino == null || pinosCasaDestino.get(0).getCor() == cor) {
+		if(pinosCasaDestino.isEmpty() || pinosCasaDestino.get(0).getCor() == cor) {
 			return false;
 		} else {
 			return true;
@@ -106,52 +109,6 @@ public class Tabuleiro {
 	 * 
 	 */
 	public void movimentaPinos(Pino pinoEmMovimento, int valorDado) {	
-//		if(pinoEmMovimento.estaCasaInicial == false) {
-//			int casaInicioPino = pinoEmMovimento.casaAtual, casaDestino = casas.size();
-//			for(int i = casaInicioPino; i < casaDestino; i++) {
-//				Casa casa = casas.get(i);
-//				List<Pino> pinos = casa.getPinos();
-//				if(pinos.size() == 2 || pinoEmMovimento.estaCasaInicial == true) {
-//
-//				}
-//				if(pinos.size() == 2 || pinoEmMovimento.estaCasaInicial == true) {
-//
-//				}
-//
-//			}
-//		} else {
-//			Casa casa = casas.get(pinoEmMovimento.getNumeroCasaDeSaida());
-//			List<Pino> pinos = casa.getPinos();
-//			if(valorDado == 5) {
-//				
-//				
-//			}
-//		}
-//		return false;
-		
-//		int casaDestino = pinoEmMovimento.casaAtual + valorDado;
-//		boolean conseguiuMover = casas.get(casaDestino).adicionaPino(pinoEmMovimento);
-//		if(conseguiuMover) {
-//			pinoEmMovimento.casaAtual = casaDestino;
-//			return true;
-//		} else {
-//			return false;
-//		}
-		
-		
-//		Equipe equipe;
-//		Pino pino;
-//		for(int i = 0; i < equipes.size(); i++) {
-//			equipe = equipes.get(i);
-//			for(int j = 0; j < equipe.pinos.size(); j++) {
-//				pino = equipe.pinos.get(j);
-//				pino.casaAtual += valorDado;
-//				if(pino.casaAtual >= 52) {
-//					pino.casaAtual -= 52;
-//				}
-//			}
-//		}
-		
 		int posicaoCasaDestino = pinoEmMovimento.casaAtual + valorDado;
 		
 		if(posicaoCasaDestino >= 52) {
@@ -175,14 +132,18 @@ public class Tabuleiro {
 	}
 	
 	public Pino achaPino(double x, double y) {
-		// TO-DO
 		Casa casa;
 		Double[] coord;
 		for(int i = 0; i < casas.size(); i++) {
 			casa = casas.get(i);
 			coord = casa.getCoord();
-			if( (x >= coord[0] && x<= coord[0] + 40) && (y >= coord[1] && y <= coord[1] + 40)) {
-				return casa.getPinos().get(0);
+			if((x >= coord[0] && x<= coord[0] + 40) && (y >= coord[1] && y <= coord[1] + 40)) {
+				if(casa.getPinos().isEmpty()) {
+					return null;
+				} else {
+					return casa.getPinos().get(0);
+				}
+				
 			}
 		}
 		
@@ -283,7 +244,7 @@ public class Tabuleiro {
 		}
 	}
 	
-	private void criaCaminhoColorido(){
+	private void criaCaminhoColorido() {
 		Double coordAdd = 0.0, coordSub = 560.0;
 		Casa[] arrayCasas = new Casa[6];
 		
