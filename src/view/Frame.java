@@ -79,7 +79,7 @@ public class Frame extends JFrame {
 				if(flagDado && !inicioJogo) {
 					if(controller.acessaTabuleiro(e.getX(), e.getY())) {
 //						if()
-						controller.updateView();
+//						controller.updateView();
 						String cor = controller.getCorEquipedaVez();
 						label2.setText("Equipe da vez:"+cor);
 						getContentPane().validate();

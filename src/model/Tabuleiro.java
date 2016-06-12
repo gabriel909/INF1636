@@ -156,6 +156,7 @@ public class Tabuleiro {
             } else {
                 movimentaPinoCaminhoColorido(pinoEmMovimento, valorDado);
             }
+            System.out.println("Troca Turno");
             trocaTurno();
             return true;
         } else {
@@ -381,25 +382,26 @@ public class Tabuleiro {
 		if(corEquipedaVez == Cor.Vermelho){
 			cor = "Vermelho";
 			return cor;
-		} else {
+		} 
+		
+		if(corEquipedaVez == Cor.Verde) {
 			cor = "Verde";
 			return cor;
 		}
+		
+		return null;
 	}
 	
 	private void trocaTurno() {
 		if(corEquipedaVez == Cor.Vermelho) {
 			corEquipedaVez = Cor.Verde;
-		}
-		if(corEquipedaVez == Cor.Verde) {
+		} else if(corEquipedaVez == Cor.Verde) {
 			corEquipedaVez = Cor.Amarelo;
-		}
-		if(corEquipedaVez == Cor.Amarelo) {
+		} else if(corEquipedaVez == Cor.Amarelo) {
 			corEquipedaVez = Cor.Azul;
-		}
-		if(corEquipedaVez == Cor.Azul) {
+		} else if(corEquipedaVez == Cor.Azul) {
 			corEquipedaVez = Cor.Vermelho;
-		}
+		}	
 	}
 	
 	
