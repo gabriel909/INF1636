@@ -28,19 +28,30 @@ public class Tabuleiro {
 	}
 	
 	// Get Pinos
-	public List<Integer> getPinoCoords() {
+	public List<Integer[]> getPinoCoords() {
 		List<Pino> pinos;
 		Equipe equipe;
-		List<Integer> pinoCoord = new ArrayList<Integer>();
+		List<Integer[]> pinoCoord = new ArrayList<Integer[]>();
 		
 		for(int i = 0; i < equipes.size(); i++) {
 			equipe = equipes.get(i);
 			pinos = equipe.getPinos();
+			
 			for(int j = 0; j < pinos.size(); j++) {
 				if(pinos.get(j).estaCasaInicial) {
-					pinoCoord.add(60);
+					Integer[] pos = {0, 0};
+					pos[1] = j;
+					pinoCoord.add(pos);
+				} else if(pinos.get(j).estaCaminhoColorido()) {
+					Integer[] pos = {0, 0};
+					pos[0] = 2;
+					pos[1] = pinos.get(j).casaAtual;
+					pinoCoord.add(pos);
 				} else {
-					pinoCoord.add(pinos.get(j).casaAtual);
+					Integer[] pos = {0, 0};
+					pos[0] = 1;
+					pos[1] = pinos.get(j).casaAtual;
+					pinoCoord.add(pos);
 				}
 			}
 		}
@@ -108,27 +119,64 @@ public class Tabuleiro {
 	 * se existir, esse pino retorna para o inicio e o pino em movimento chega na casa destino
 	 * 
 	 */
-	public void movimentaPinos(Pino pinoEmMovimento, int valorDado) {	
+	public boolean movimentaPinos(Pino pinoEmMovimento, int valorDado) {	
 		int posicaoCasaDestino = pinoEmMovimento.casaAtual + valorDado;
 		
 		if(posicaoCasaDestino >= 52) {
 			posicaoCasaDestino -= 52;
 		}
 		
-		Casa casaDestino = casas.get(posicaoCasaDestino);
-		int casaAtual = pinoEmMovimento.casaAtual;
-		Cor cor = pinoEmMovimento.getCor();
-		if(!checaBarreira(posicaoCasaDestino, valorDado, casaAtual)) {
-			if(checaInimigo(cor, casaDestino) && !casaDestino.getAbrigo()) {
-				comePinoInimigo(casaDestino);
-				casaDestino.adicionaPino(pinoEmMovimento);
-				pinoEmMovimento.casaAtual = posicaoCasaDestino;
-			} else {
-				pinoEmMovimento.casaAtual = posicaoCasaDestino;
-				casaDestino.adicionaPino(pinoEmMovimento);
+		if((pinoEmMovimento.qtdCasasAndadas + valorDado) < 52) {
+			Casa casaDestino = casas.get(posicaoCasaDestino);
+			int posicaoCasaAtual = pinoEmMovimento.casaAtual;
+			Casa casaAtual = casas.get(posicaoCasaAtual);
+			Cor cor = pinoEmMovimento.getCor();
+			
+			if(!checaBarreira(posicaoCasaDestino, valorDado, posicaoCasaAtual)) {
+				if(checaInimigo(cor, casaDestino)) {
+					if(!casaDestino.getAbrigo()) {
+						comePinoInimigo(casaDestino);
+						casaDestino.adicionaPino(pinoEmMovimento);
+						casaAtual.removerPinos(pinoEmMovimento);
+						pinoEmMovimento.casaAtual = posicaoCasaDestino;
+						pinoEmMovimento.qtdCasasAndadas += valorDado;
+					} 
+					return false;
+					
+				} else {
+					pinoEmMovimento.casaAtual = posicaoCasaDestino;
+					casaDestino.adicionaPino(pinoEmMovimento);
+					casaAtual.removerPinos(pinoEmMovimento);
+					pinoEmMovimento.qtdCasasAndadas += valorDado;
+				}
+				
 			}
+		} else {
+			movimentaPinoCaminhoColorido(pinoEmMovimento, valorDado);
 		}
 		
+		return true;
+	}
+	
+	public void movimentaPinoCaminhoColorido(Pino pinoEmMovimento, int valorDado) {
+		int indiceEquipe = getIndiceCor(pinoEmMovimento.getCor());
+		int posicaoCasaDestino = ((pinoEmMovimento.qtdCasasAndadas + valorDado) - 52);
+		int posicaoCasaDestinoArrayPanel = posicaoCasaDestino + (indiceEquipe * 6);
+		
+		if(pinoEmMovimento.estaCaminhoColorido() && (pinoEmMovimento.qtdCasasAndadas + valorDado) == 58) {
+			equipes.get(indiceEquipe).addPinoCasaFinal();
+			System.out.println("Pino casa final");
+			
+//			pino
+			
+		} else {
+			System.out.println(posicaoCasaDestino);
+			pinoEmMovimento.casaAtual = posicaoCasaDestinoArrayPanel;
+			Casa casaDestino = casasColoridas.get(indiceEquipe)[posicaoCasaDestino];
+			casaDestino.adicionaPino(pinoEmMovimento);
+			
+			pinoEmMovimento.qtdCasasAndadas += valorDado;
+		}
 	}
 	
 	public Pino achaPino(double x, double y) {
@@ -143,7 +191,6 @@ public class Tabuleiro {
 				} else {
 					return casa.getPinos().get(0);
 				}
-				
 			}
 		}
 		
@@ -156,10 +203,10 @@ public class Tabuleiro {
 		Equipe equipeVerde = new Equipe(Cor.Verde);
 		Equipe equipeVermelho = new Equipe(Cor.Vermelho);
 		
+		equipes.add(equipeVermelho);
+		equipes.add(equipeVerde);
 		equipes.add(equipeAmarelo);
 		equipes.add(equipeAzul);
-		equipes.add(equipeVerde);
-		equipes.add(equipeVermelho);
 	}
 	
 	private void criaCaminhoBranco() {
@@ -250,22 +297,23 @@ public class Tabuleiro {
 		
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(i == 0) {
-					coordAdd += 40.0;
-					Casa casa = new Casa(coordAdd, 280.0, Cor.Verde);
-					arrayCasas[j] = casa;
-				}
-				
-				if(i == 1) {
+				if(i == 0) {					
 					coordSub -= 40.0;
 					Casa casa = new Casa(280.0, coordSub, Cor.Amarelo);
 					arrayCasas[j] = casa;
 				}
 				
-				if(i == 2) {
+				if(i == 1) {
 					coordSub -= 40.0;
 					Casa casa = new Casa(coordSub, 280.0, Cor.Azul);
 					arrayCasas[j] = casa;
+				}
+				
+				if(i == 2) {
+					coordAdd += 40.0;
+					Casa casa = new Casa(coordAdd, 280.0, Cor.Verde);
+					arrayCasas[j] = casa;
+					
 				}
 				
 				if(i == 3) {
@@ -288,5 +336,21 @@ public class Tabuleiro {
 	//Método que retorna o Singleton
 	public static Tabuleiro getTabuleiro() {
 		return tabuleiro;
+	}
+	
+	public int getIndiceCor(Cor cor) {
+		switch(cor) {
+			case Amarelo:
+				return 0;
+			
+			case Azul:
+				return 1;
+			
+			case Verde:
+				return 2;
+			
+			default:
+				return 3;
+		}
 	}
 }

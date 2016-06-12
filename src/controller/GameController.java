@@ -18,13 +18,22 @@ public class GameController {
 	// get posição peça
 	public void updateView() {
 		List<Casa> casas = tabuleiro.getCasas();
+//		List<Casa[]> casasColoridas = tabuleiro.getCasasColoridas();
 		painel.pinosCoord = tabuleiro.getPinoCoords();
 		painel.casasCoord.clear();
 		
 		for(int i = 0; i < casas.size(); i++) {
 			Casa casa = casas.get(i);
 			painel.casasCoord.add(casa.getCoord());
-		}
+		} 
+		
+//		if()
+		
+//		for(int j = 0; j < casasColoridas.size(); j++) {
+//			for(int k = 0; k < casasColoridas.get(j).length; k++) {
+//				
+//			}
+//		}
 	}
 	
 	public int getValorDado() {
@@ -34,11 +43,15 @@ public class GameController {
 	
 	public boolean acessaTabuleiro(double x, double y) {
 		Pino pino = tabuleiro.achaPino(x, y);
+		boolean valorReturn;
 		if(pino != null) {
-			tabuleiro.movimentaPinos(pino, dado);
+//			if(pino.getCasaInical()) {
+//				pino.
+//			}
+			valorReturn = tabuleiro.movimentaPinos(pino, dado);
 			updateView();
 			
-			return true;
+			return valorReturn;
 		}
 		
 		return false;

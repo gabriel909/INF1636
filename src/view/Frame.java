@@ -25,8 +25,6 @@ public class Frame extends JFrame {
 					int dado = controller.getValorDado();
 					label.setText(Integer.toString(dado));
 					flagDado = true;
-					//				getContentPane().validate();
-					//				getContentPane().repaint();
 				}
 			}
 		});
@@ -65,15 +63,14 @@ public class Frame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(flagDado) {
 					if(controller.acessaTabuleiro(e.getX(), e.getY())) {
+//						if()
 						controller.updateView();
 						getContentPane().validate();
 						getContentPane().repaint();
 						flagDado = false;
 					}
-					
 				}
 			}
-		
 		});
 		p.add(label);
 		p.add(b1);

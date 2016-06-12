@@ -1,5 +1,5 @@
 package model;
 
 enum Cor {
-	Vermelho, Verde, Azul, Amarelo, Branco;
+	Amarelo, Azul, Verde, Vermelho, Branco;
 }

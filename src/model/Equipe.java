@@ -1,6 +1,6 @@
 package model;
 
-import java.util.*;;
+import java.util.*;
 
 public class Equipe {
 	
@@ -34,6 +34,10 @@ public class Equipe {
 	
 	public List<Pino> getPinos(){
 		return pinos;
+	}
+	
+	public void addPinoCasaFinal() {
+		qtdPinosCasaFinal++;
 	}
 
 }
