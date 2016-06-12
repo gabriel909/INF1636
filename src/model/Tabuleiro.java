@@ -140,20 +140,32 @@ public class Tabuleiro {
 			
                 if(!checaBarreira(posicaoCasaDestino, valorDado, posicaoCasaAtual)) {
                     if(checaInimigo(cor, casaDestino)) {
-//                        if(!casaDestino.getAbrigo()) {
+                        if(!casaDestino.getAbrigo()) {
                             comePinoInimigo(casaDestino);
                             casaDestino.adicionaPino(pinoEmMovimento);
                             casaAtual.removerPinos(pinoEmMovimento);
                             pinoEmMovimento.casaAtual = posicaoCasaDestino;
                             pinoEmMovimento.qtdCasasAndadas += valorDado;
-//                        }
-                        return false;
+                            
+                        } else {
+                        	return false;
+                        }
 					
+                    } else if(pinoEmMovimento.estaCasaInicial) {
+                    	if(valorDado == 5) {
+                    		Casa casaInicial = casas.get(pinoEmMovimento.getNumeroCasaDeSaida());
+                        	casaInicial.adicionaPino(pinoEmMovimento);
+                        	pinoEmMovimento.estaCasaInicial = false;
+                        	pinoEmMovimento.casaAtual = pinoEmMovimento.getNumeroCasaDeSaida();
+                    	} else {
+                    		return false;
+                    	}
                     } else {
                         pinoEmMovimento.casaAtual = posicaoCasaDestino;
                         casaDestino.adicionaPino(pinoEmMovimento);
                         casaAtual.removerPinos(pinoEmMovimento);
                         pinoEmMovimento.qtdCasasAndadas += valorDado;
+                        
                     }
 				
                 }
@@ -267,6 +279,22 @@ public class Tabuleiro {
 						return casa.getPinos().get(0);
 					}
 				}
+			}
+			
+			if((x >= 0.0 && x <= 240.0) && (y >= 0.0 && y <= 240.0)) {
+				return equipes.get(1).getPinoCasaInicial();
+			} 
+			
+			if((x >= 360.0 && x <= 600.0) && (y >= 0.0 && y <= 240.0)) {
+				return equipes.get(0).getPinoCasaInicial();
+			}
+			
+			if((x >= 0.0 && x <= 240.0) && (y >= 360.0 && y <= 600.0)) {
+				return equipes.get(2).getPinoCasaInicial();
+			}
+			
+			if((x >= 360.0 && x <= 600.0) && (y >= 360.0 && y <= 600.0)) {
+				return equipes.get(3).getPinoCasaInicial();
 			}
 		}
 		

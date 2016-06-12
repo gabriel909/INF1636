@@ -53,5 +53,15 @@ public class Equipe {
     public void addPinoCasaFinal() {
 		qtdPinosCasaFinal++;
 	}
+    
+    public Pino getPinoCasaInicial() {
+    	for(int i = 0; i < pinos.size(); i++) {
+    		if(pinos.get(i).estaCasaInicial) {
+    			return pinos.get(i);
+    		}
+    	}
+    	
+    	return null;
+    }
 
 }
