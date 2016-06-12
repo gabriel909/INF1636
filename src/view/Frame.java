@@ -81,7 +81,7 @@ public class Frame extends JFrame {
 //						if()
 //						controller.updateView();
 						String cor = controller.getCorEquipedaVez();
-						label2.setText("Equipe da vez:"+cor);
+						label2.setText("Equipe da vez: "+cor);
 						getContentPane().validate();
 						getContentPane().repaint();
 						flagDado = false;

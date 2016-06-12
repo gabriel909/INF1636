@@ -81,31 +81,33 @@ public class Panel extends JPanel {
 			
 			for(int j = 0; j <= 5; j++) {
 				if(i == 0) {
-					coordSub -= 40.0;
-					fazRetangulo(280.0, coordSub, size, size, Color.YELLOW, g2d);
-					Double[] coordColorido = {280.0, coordSub};
+					coordAdd += 40.0;
+					fazRetangulo(280.0, coordAdd, size, size, Color.RED, g2d);
+					Double[] coordColorido = {coordAdd, 280.0};
 					caminhoColoridoCoord.add(coordColorido);
 				}
 				
 				if(i == 1) {
-					coordSub -= 40.0;
-					fazRetangulo(coordSub, 280.0, size, size, Color.BLUE, g2d);
-					Double[] coordColorido = {coordSub, 280.0};
-					caminhoColoridoCoord.add(coordColorido);
-				}
-				
-				if(i == 2) {
 					coordAdd += 40.0;
 					fazRetangulo(coordAdd, 280.0, size, size, Color.GREEN, g2d);
 					Double[] coordColorido = {coordAdd, 280.0};
 					caminhoColoridoCoord.add(coordColorido);
 				}
 				
-				if(i == 3) {
-					coordAdd += 40.0;
-					fazRetangulo(280.0, coordAdd, size, size, Color.RED, g2d);
-					Double[] coordColorido = {coordAdd, 280.0};
+				if(i == 2) {
+					coordSub -= 40.0;
+					fazRetangulo(280.0, coordSub, size, size, Color.YELLOW, g2d);
+					Double[] coordColorido = {280.0, coordSub};
 					caminhoColoridoCoord.add(coordColorido);
+					
+				}
+				
+				if(i == 3) {
+					coordSub -= 40.0;
+					fazRetangulo(coordSub, 280.0, size, size, Color.BLUE, g2d);
+					Double[] coordColorido = {coordSub, 280.0};
+					caminhoColoridoCoord.add(coordColorido);
+					
 				}
 			}
 		}

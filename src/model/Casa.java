@@ -62,7 +62,9 @@ public class Casa {
 	}
 	
 	public void removerPinos(Pino pino) {
+		System.out.println("Qtd pinos antes: "+pinos.size());
 		pinos.remove(pino);
+		System.out.println("Qtd pinos: "+pinos.size());
 	}
 	
 	public boolean getAbrigo() {

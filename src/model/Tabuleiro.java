@@ -71,11 +71,13 @@ public class Tabuleiro {
 	 */
 	private boolean checaBarreira(int casaDestino, int valorDado, int casaAtual) {
 		if(casas.get(casaDestino).getBarreira()) {
+			System.out.println("Barreira true");
 			return true;
 			
 		} else {
 			for(int i = casaAtual; i <= valorDado; i++) {
 				if (casas.get(i).getBarreira()) {
+					System.out.println("Barreira true");
 					return true;
 				}
 			}
@@ -136,13 +138,13 @@ public class Tabuleiro {
 			
                 if(!checaBarreira(posicaoCasaDestino, valorDado, posicaoCasaAtual)) {
                     if(checaInimigo(cor, casaDestino)) {
-                        if(!casaDestino.getAbrigo()) {
+//                        if(!casaDestino.getAbrigo()) {
                             comePinoInimigo(casaDestino);
                             casaDestino.adicionaPino(pinoEmMovimento);
                             casaAtual.removerPinos(pinoEmMovimento);
                             pinoEmMovimento.casaAtual = posicaoCasaDestino;
                             pinoEmMovimento.qtdCasasAndadas += valorDado;
-                        }
+//                        }
                         return false;
 					
                     } else {
@@ -156,7 +158,6 @@ public class Tabuleiro {
             } else {
                 movimentaPinoCaminhoColorido(pinoEmMovimento, valorDado);
             }
-            System.out.println("Troca Turno");
             trocaTurno();
             return true;
         } else {
@@ -192,10 +193,26 @@ public class Tabuleiro {
 			casa = casas.get(i);
 			coord = casa.getCoord();
 			if((x >= coord[0] && x<= coord[0] + 40) && (y >= coord[1] && y <= coord[1] + 40)) {
-				if(casa.getPinos().isEmpty()) {
-					return null;
-				} else {
+				if(!casa.getPinos().isEmpty()) {
 					return casa.getPinos().get(0);
+				}
+			}
+		}
+		
+		for(int j = 0; j < casasColoridas.size(); j++) {
+			Casa[] arrayCasas = casasColoridas.get(j);
+			
+			for(int k = 0; k < arrayCasas.length; k++) {
+				casa = arrayCasas[k];
+				coord = casa.getCoord();
+				
+				if((x >= coord[0] && x<= coord[0] + 40) && (y >= coord[1] && y <= coord[1] + 40)) {
+					if(casa.getPinos().isEmpty()) {
+						return null;
+					} else {
+						System.out.println("pino");
+						return casa.getPinos().get(0);
+					}
 				}
 			}
 		}
@@ -395,10 +412,13 @@ public class Tabuleiro {
 	private void trocaTurno() {
 		if(corEquipedaVez == Cor.Vermelho) {
 			corEquipedaVez = Cor.Verde;
+			
 		} else if(corEquipedaVez == Cor.Verde) {
 			corEquipedaVez = Cor.Amarelo;
+			
 		} else if(corEquipedaVez == Cor.Amarelo) {
 			corEquipedaVez = Cor.Azul;
+			
 		} else if(corEquipedaVez == Cor.Azul) {
 			corEquipedaVez = Cor.Vermelho;
 		}	
@@ -412,13 +432,13 @@ public class Tabuleiro {
 	
 	public int getIndiceCor(Cor cor) {
 		switch(cor) {
-			case Amarelo:
+			case Vermelho:
 				return 0;
 			
-			case Azul:
+			case Verde:
 				return 1;
 			
-			case Verde:
+			case Amarelo:
 				return 2;
 			
 			default:
