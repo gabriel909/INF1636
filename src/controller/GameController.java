@@ -45,7 +45,16 @@ public class GameController {
 	
 	public int getValorDado() {
 		dado =  tabuleiro.rolarDados();
+		if(dado == 6) {
+			if(tabuleiro.contaSeis()) {
+				return 7;
+			}
+		}
 		return dado;
+	}
+	
+	public boolean acessaTabuleiro() {
+		return tabuleiro.movimentacaoDoTerceiro6();
 	}
 	
 	public boolean acessaTabuleiro(double x, double y) {

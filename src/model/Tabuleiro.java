@@ -11,6 +11,7 @@ public class Tabuleiro {
 	private ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 	private Double x, y;
 	private Cor corEquipedaVez;
+	private int tirou6 = 0;
 		
 	private Tabuleiro() {
 		criaCaminhoBranco();
@@ -120,7 +121,8 @@ public class Tabuleiro {
 	 * se existir, esse pino retorna para o inicio e o pino em movimento chega na casa destino
 	 * 
 	 */
-	public boolean movimentaPinos(Pino pinoEmMovimento, int valorDado) {	
+	public boolean movimentaPinos(Pino pinoEmMovimento, int valorDado) {
+		
 		int posicaoCasaDestino = pinoEmMovimento.casaAtual + valorDado;
         
         if(pinoEmMovimento.getCor() == corEquipedaVez) {
@@ -156,12 +158,48 @@ public class Tabuleiro {
             } else {
                 movimentaPinoCaminhoColorido(pinoEmMovimento, valorDado);
             }
-            System.out.println("Troca Turno");
-            trocaTurno();
-            return true;
+            if(tirou6 > 0 && valorDado == 6) {
+                return true;
+            } else {
+            	tirou6 = 0;
+                trocaTurno();
+                return true;
+            }
         } else {
             return false;
         }
+	}
+	/*
+	 * input: -
+	 * output: Se tirou6 ficar igual a 3, retorna true, do contrário falso.
+	 */
+	public boolean contaSeis() {
+		tirou6++;
+		if(tirou6 == 3) {
+			tirou6 = 0;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean movimentacaoDoTerceiro6() {
+		Pino pino = null;
+		for(Equipe equipe : equipes) {
+			if(equipe.getCor() == corEquipedaVez) {
+				pino = equipe.ultimoPinoMovimentado;
+				break;
+			}
+		}
+		if(!pino.estaCaminhoColorido()) {
+			pino.estaCasaInicial = true;
+			trocaTurno();
+			return true;
+		} else {
+			trocaTurno();
+			return false;
+		}
+		
+		
 	}
 	
 	public void movimentaPinoCaminhoColorido(Pino pinoEmMovimento, int valorDado) {
