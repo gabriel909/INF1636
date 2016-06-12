@@ -7,7 +7,7 @@ public class Casa {
 	private Double x, y;
 	private List<Pino> pinos = new ArrayList<Pino>();
 	private Cor cor;
-	private boolean barreira = false;
+//	private boolean barreira = false;
 	private boolean abrigo = false;
 	
 	public Casa(double x, double y, Cor cor) {
@@ -36,7 +36,7 @@ public class Casa {
 	public boolean adicionaPino(Pino pino) {
 		if(pinos.size() < 2) {
 			if(pinos.size() == 1) {
-				barreira = true;
+//				barreira = true;
 			}
 			
 			pinos.add(pino);
@@ -54,7 +54,15 @@ public class Casa {
 	}
 	
 	public boolean getBarreira() {
-			return barreira;		
+		if(pinos.size() >= 2) {
+			return true;
+		} else {
+		return false;
+		}
+	}
+	
+	public void removerPinos(Pino pino) {
+		pinos.remove(pino);
 	}
 	
 	public boolean getAbrigo() {

@@ -13,15 +13,22 @@ import java.util.*;
 public class Panel extends JPanel {
 
 	public List<Double[]> casasCoord = new ArrayList<Double[]>();
-	public List<Integer> pinosCoord = new ArrayList<Integer>();
+	public List<Integer[]> pinosCoord = new ArrayList<Integer[]>();
 	public List<Double[]> casasIniciaisCood = new ArrayList<Double[]>();
+	public List<Double[]> caminhoColoridoCoord = new ArrayList<Double[]>();
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
 		Graphics2D g2d = (Graphics2D) g;
 
-		fazCasaFinal(g2d);
+		
 		fazCasaInicial(g2d);
+		
+		// Time Vermelho
+		criaEspacoPinos(410.0, 50.0, g2d);
+				
+		// Time Verde
+		criaEspacoPinos(50.0, 50.0, g2d);
 		
 		// Time Amarelo
 		criaEspacoPinos(50.0, 410.0, g2d);
@@ -29,14 +36,9 @@ public class Panel extends JPanel {
 		// Time Azul
 		criaEspacoPinos(410.0, 410.0, g2d);
 
-		// Time Verde
-		criaEspacoPinos(50.0, 50.0, g2d);
-
-		// Time Vermelho
-		criaEspacoPinos(410.0, 50.0, g2d);
-		
 		fazCaminhoBranco(g2d);
 		fazCaminhoColorido(g2d);
+		fazCasaFinal(g2d);
 		fazSetaCasaSaida(g2d);
 		criaPino(g2d);
 	}
@@ -77,25 +79,33 @@ public class Panel extends JPanel {
 		for(int i = 0; i < 4; i++) {
 			double coordAdd = 0.0, coordSub = 560.0;
 			
-			for(int j = 0; j < 5; j++) {
+			for(int j = 0; j <= 5; j++) {
 				if(i == 0) {
-					coordAdd += 40.0;
-					fazRetangulo(coordAdd, 280.0, size, size, Color.GREEN, g2d);
+					coordSub -= 40.0;
+					fazRetangulo(280.0, coordSub, size, size, Color.YELLOW, g2d);
+					Double[] coordColorido = {280.0, coordSub};
+					caminhoColoridoCoord.add(coordColorido);
 				}
 				
 				if(i == 1) {
 					coordSub -= 40.0;
-					fazRetangulo(280.0, coordSub, size, size, Color.YELLOW, g2d);
+					fazRetangulo(coordSub, 280.0, size, size, Color.BLUE, g2d);
+					Double[] coordColorido = {coordSub, 280.0};
+					caminhoColoridoCoord.add(coordColorido);
 				}
 				
 				if(i == 2) {
-					coordSub -= 40.0;
-					fazRetangulo(coordSub, 280.0, size, size, Color.BLUE, g2d);
+					coordAdd += 40.0;
+					fazRetangulo(coordAdd, 280.0, size, size, Color.GREEN, g2d);
+					Double[] coordColorido = {coordAdd, 280.0};
+					caminhoColoridoCoord.add(coordColorido);
 				}
 				
 				if(i == 3) {
 					coordAdd += 40.0;
 					fazRetangulo(280.0, coordAdd, size, size, Color.RED, g2d);
+					Double[] coordColorido = {coordAdd, 280.0};
+					caminhoColoridoCoord.add(coordColorido);
 				}
 			}
 		}
@@ -103,7 +113,7 @@ public class Panel extends JPanel {
 	
 	void criaPino(Graphics2D g2d) {
 		// TODO
-		int j;
+		Integer j[];
 		Double[] coord;
 		double y, x, raio = 35.0;
 		
@@ -112,32 +122,29 @@ public class Panel extends JPanel {
 			Color cor = null;
 			
 			if(i < 4) {
-//				cor = Color.YELLOW.darker();
 				cor = Color.RED.darker();
-
 			}
 			
 			if(i > 3 && i < 8) {
-//				cor = Color.BLUE.darker();
 				cor = Color.GREEN.darker();
 			}
 			
 			if(i > 7 && i < 12) {
-//				cor = Color.GREEN.darker();
-				cor = Color.YELLOW.darker();			}
-			
+
+				cor = Color.YELLOW.darker();
+            }
+            
 			if(i > 11 && i < 16) {
-//				cor = Color.RED.darker();
 				cor = Color.BLUE.darker();
 			}
 			
-			if(j != 60) {
-				coord = casasCoord.get(j);
+			if(j[0] == 1) {
+				coord = casasCoord.get(j[1]);
 				y = coord[0] + 2.5;
 				x = coord[1] + 2.5;
 				
 				fazCirculo(y, x, raio, raio, cor, g2d);
-			} else {
+			} else if(j[0] == 0) {
 				
 				coord = casasIniciaisCood.get(i);
 //				System.out.println("coords: "+coord[0]+" "+coord[1]+" "+"casasIniciasCoord: "+casasIniciaisCood.get(i)[0]+" "+casasIniciaisCood.get(i)[1]+" i: "+i);
@@ -147,6 +154,13 @@ public class Panel extends JPanel {
 //				System.out.println(x+" "+y);
 				
 				fazCirculo(x, y, raio, raio, cor, g2d);
+			} else if(j[0] == 2) {
+				coord = caminhoColoridoCoord.get(j[1]);
+				y = coord[0] + 2.5;
+				x = coord[1] + 2.5;
+				
+				fazCirculo(y, x, raio, raio, cor, g2d);
+			
 			}
 		}
 	}

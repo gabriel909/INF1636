@@ -6,6 +6,7 @@ public class Pino {
 	private int casaDeSaida;
 	protected int casaAtual;
 	protected boolean estaCasaInicial = false;
+	protected int qtdCasasAndadas = 0;
 	
 	public Pino(Cor cor) {
 		this.cor = cor;
@@ -35,5 +36,13 @@ public class Pino {
 	 */
 	public int getNumeroCasaDeSaida() {
 		return casaDeSaida;
+	}
+	
+	public boolean estaCaminhoColorido() {
+		if(qtdCasasAndadas >= 52) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

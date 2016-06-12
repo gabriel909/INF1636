@@ -28,8 +28,6 @@ public class Frame extends JFrame {
 					int dado = controller.getValorDado();
 					label.setText(Integer.toString(dado));
 					flagDado = true;
-					//				getContentPane().validate();
-					//				getContentPane().repaint();
 				}
 			}
 		});
@@ -80,6 +78,7 @@ public class Frame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(flagDado && !inicioJogo) {
 					if(controller.acessaTabuleiro(e.getX(), e.getY())) {
+//						if()
 						controller.updateView();
 						String cor = controller.getCorEquipedaVez();
 						label2.setText("Equipe da vez:"+cor);
@@ -87,10 +86,8 @@ public class Frame extends JFrame {
 						getContentPane().repaint();
 						flagDado = false;
 					}
-					
 				}
 			}
-		
 		});
 		p.add(label);
 		p.add(label2);
