@@ -26,17 +26,23 @@ public class Frame extends JFrame {
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!flagDado) {
-					dado = controller.getValorDado();
+					dado = controller.getValorDado();					
 					if(dado == 7) {
 						label.setText(Integer.toString(6));
 						if(controller.acessaTabuleiro()) {
 							// AVISO QUE ULTIMA PEÇA VAI VOLTAR PRA CASA INICIAL
 							JOptionPane.showMessageDialog(null, "Você tirou 6 pela terceira vez, sua última peça movimentada será colocada na casa inicial.");
+							controller.updateView();
+							getContentPane().validate();
+							getContentPane().repaint();
 							String cor = controller.getCorEquipedaVez();
 							label2.setText("Equipe da vez:"+cor);
 						} else {
 							//  AVISO QUE ULTIMA PEÇA N VAI VOLTAR PRA CASA INICIAL POIS JA ESTA NO CAMINHO COLORIDO
 							JOptionPane.showMessageDialog(null, "Você tirou 6 pela terceira vez, mas sua última peça não será colocada na casa inicial pois ela já está no caminho colorido.");
+							controller.updateView();
+							getContentPane().validate();
+							getContentPane().repaint();
 							String cor = controller.getCorEquipedaVez();
 							label2.setText("Equipe da vez:"+cor);
 						}

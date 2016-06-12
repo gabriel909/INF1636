@@ -159,8 +159,12 @@ public class Tabuleiro {
                 movimentaPinoCaminhoColorido(pinoEmMovimento, valorDado);
             }
             if(tirou6 > 0 && valorDado == 6) {
+            	Equipe equipe = achaEquipePelaCorPino(pinoEmMovimento.getCor());
+            	equipe.ultimoPinoMovimentado = pinoEmMovimento;
                 return true;
             } else {
+            	Equipe equipe = achaEquipePelaCorPino(pinoEmMovimento.getCor());
+            	equipe.ultimoPinoMovimentado = pinoEmMovimento;
             	tirou6 = 0;
                 trocaTurno();
                 return true;
@@ -198,8 +202,17 @@ public class Tabuleiro {
 			trocaTurno();
 			return false;
 		}
-		
-		
+			
+	}
+	
+	private Equipe achaEquipePelaCorPino(Cor corDoPino) {
+		for(Equipe equipe : equipes) {
+			if(equipe.getCor() == corEquipedaVez) {
+				return equipe;
+				
+			}
+		}
+		return null;
 	}
 	
 	public void movimentaPinoCaminhoColorido(Pino pinoEmMovimento, int valorDado) {
@@ -397,6 +410,7 @@ public class Tabuleiro {
 				dadosDiferentes(i, i-1);
 			}
 		}
+		corEquipedaVez = Cor.Verde;
 		for(Equipe eq : equipes) {
 			if(eq.dado > equipes.get(0).dado) {
 				corEquipedaVez = eq.getCor();
