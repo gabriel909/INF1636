@@ -8,6 +8,7 @@ public class Equipe {
 	private Cor cor;
 	private int qtdPinosCasaFinal = 0;
 	protected int dado;
+	protected Pino ultimoPinoMovimentado;
 	
 	public Equipe(Cor cor) {
 		this.cor = cor;
