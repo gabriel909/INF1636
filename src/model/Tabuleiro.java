@@ -8,8 +8,9 @@ public class Tabuleiro {
 	
 	private List<Casa> casas = new ArrayList<Casa>();
 	private List<Casa[]> casasColoridas = new ArrayList<Casa[]>();
-	private List<Equipe> equipes = new ArrayList<Equipe>();
+	private ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 	private Double x, y;
+	private Cor corEquipedaVez;
 		
 	private Tabuleiro() {
 		criaCaminhoBranco();
@@ -111,26 +112,29 @@ public class Tabuleiro {
 	public void movimentaPinos(Pino pinoEmMovimento, int valorDado) {	
 		int posicaoCasaDestino = pinoEmMovimento.casaAtual + valorDado;
 		
-		if(posicaoCasaDestino >= 52) {
-			posicaoCasaDestino -= 52;
-		}
-		
-		Casa casaDestino = casas.get(posicaoCasaDestino);
-		int casaAtual = pinoEmMovimento.casaAtual;
-		Cor cor = pinoEmMovimento.getCor();
-		if(!checaBarreira(posicaoCasaDestino, valorDado, casaAtual)) {
-			if(checaInimigo(cor, casaDestino) && !casaDestino.getAbrigo()) {
-				comePinoInimigo(casaDestino);
-				casaDestino.adicionaPino(pinoEmMovimento);
-				pinoEmMovimento.casaAtual = posicaoCasaDestino;
-			} else {
-				pinoEmMovimento.casaAtual = posicaoCasaDestino;
-				casaDestino.adicionaPino(pinoEmMovimento);
+		if(pinoEmMovimento.getCor() == corEquipedaVez) {
+			if(posicaoCasaDestino >= 52) {
+				posicaoCasaDestino -= 52;
 			}
+
+			Casa casaDestino = casas.get(posicaoCasaDestino);
+			int casaAtual = pinoEmMovimento.casaAtual;
+			Cor cor = pinoEmMovimento.getCor();
+			if(!checaBarreira(posicaoCasaDestino, valorDado, casaAtual)) {
+				if(checaInimigo(cor, casaDestino) && !casaDestino.getAbrigo()) {
+					comePinoInimigo(casaDestino);
+					casaDestino.adicionaPino(pinoEmMovimento);
+					pinoEmMovimento.casaAtual = posicaoCasaDestino;
+				} else {
+					pinoEmMovimento.casaAtual = posicaoCasaDestino;
+					casaDestino.adicionaPino(pinoEmMovimento);
+				}
+			}
+			trocaTurno();
 		}
 		
 	}
-	
+
 	public Pino achaPino(double x, double y) {
 		Casa casa;
 		Double[] coord;
@@ -156,10 +160,11 @@ public class Tabuleiro {
 		Equipe equipeVerde = new Equipe(Cor.Verde);
 		Equipe equipeVermelho = new Equipe(Cor.Vermelho);
 		
+		equipes.add(equipeVermelho);
+		equipes.add(equipeVerde);
 		equipes.add(equipeAmarelo);
 		equipes.add(equipeAzul);
-		equipes.add(equipeVerde);
-		equipes.add(equipeVermelho);
+		
 	}
 	
 	private void criaCaminhoBranco() {
@@ -284,6 +289,70 @@ public class Tabuleiro {
 			casas.get(pino.casaAtual).adicionaPino(pino);
 		}
 	}
+	
+	private void dadosDiferentes(int i, int j) {
+		if(equipes.get(j).dado == equipes.get(i).dado) {
+			while(equipes.get(j).dado == equipes.get(i).dado) {
+				equipes.get(j).dado = rolarDados();
+				equipes.get(i).dado = rolarDados();
+			}
+		}
+		if(j != 0) {
+			dadosDiferentes(i, j-1);
+		}
+	}
+	
+	public void geraDadoInicialDasEquipes() {
+		for(int i = 0; i < equipes.size(); i++) {
+			equipes.get(i).dado = rolarDados();
+			if(i != 0) {
+				dadosDiferentes(i, i-1);
+			}
+		}
+		for(Equipe eq : equipes) {
+			if(eq.dado > equipes.get(0).dado) {
+				corEquipedaVez = eq.getCor();
+			}
+			System.out.println(eq.dado);
+		}
+	}
+	
+	public String getEquipedaVez(){
+		String cor;
+		if(corEquipedaVez == Cor.Amarelo){
+			cor = "Amarelo";
+			return cor;
+		}
+		
+		if(corEquipedaVez == Cor.Azul){
+			cor = "Azul";
+			return cor;
+		}
+		
+		if(corEquipedaVez == Cor.Vermelho){
+			cor = "Vermelho";
+			return cor;
+		} else {
+			cor = "Verde";
+			return cor;
+		}
+	}
+	
+	private void trocaTurno() {
+		if(corEquipedaVez == Cor.Vermelho) {
+			corEquipedaVez = Cor.Verde;
+		}
+		if(corEquipedaVez == Cor.Verde) {
+			corEquipedaVez = Cor.Amarelo;
+		}
+		if(corEquipedaVez == Cor.Amarelo) {
+			corEquipedaVez = Cor.Azul;
+		}
+		if(corEquipedaVez == Cor.Azul) {
+			corEquipedaVez = Cor.Vermelho;
+		}
+	}
+	
 	
 	//Método que retorna o Singleton
 	public static Tabuleiro getTabuleiro() {

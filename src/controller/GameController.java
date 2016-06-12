@@ -20,11 +20,18 @@ public class GameController {
 		List<Casa> casas = tabuleiro.getCasas();
 		painel.pinosCoord = tabuleiro.getPinoCoords();
 		painel.casasCoord.clear();
-		
 		for(int i = 0; i < casas.size(); i++) {
 			Casa casa = casas.get(i);
 			painel.casasCoord.add(casa.getCoord());
 		}
+	}
+	
+	public void geraOrdemEquipes() {
+		tabuleiro.geraDadoInicialDasEquipes();
+//		tabuleiro.ordenaEquipes(3);
+	}
+	public String getCorEquipedaVez() {
+		return tabuleiro.getEquipedaVez();
 	}
 	
 	public int getValorDado() {
@@ -40,8 +47,9 @@ public class GameController {
 			
 			return true;
 		}
-		
 		return false;
 	}
+	
+	
 	
 }

@@ -24,16 +24,16 @@ public class Panel extends JPanel {
 		fazCasaInicial(g2d);
 		
 		// Time Amarelo
-		criaEspaçoPinos(50.0, 410.0, g2d);
+		criaEspacoPinos(50.0, 410.0, g2d);
 
 		// Time Azul
-		criaEspaçoPinos(410.0, 410.0, g2d);
+		criaEspacoPinos(410.0, 410.0, g2d);
 
 		// Time Verde
-		criaEspaçoPinos(50.0, 50.0, g2d);
+		criaEspacoPinos(50.0, 50.0, g2d);
 
 		// Time Vermelho
-		criaEspaçoPinos(410.0, 50.0, g2d);
+		criaEspacoPinos(410.0, 50.0, g2d);
 		
 		fazCaminhoBranco(g2d);
 		fazCaminhoColorido(g2d);
@@ -112,19 +112,23 @@ public class Panel extends JPanel {
 			Color cor = null;
 			
 			if(i < 4) {
-				cor = Color.YELLOW.darker();
+//				cor = Color.YELLOW.darker();
+				cor = Color.RED.darker();
+
 			}
 			
 			if(i > 3 && i < 8) {
-				cor = Color.BLUE.darker();
-			}
-			
-			if(i > 7 && i < 12) {
+//				cor = Color.BLUE.darker();
 				cor = Color.GREEN.darker();
 			}
 			
+			if(i > 7 && i < 12) {
+//				cor = Color.GREEN.darker();
+				cor = Color.YELLOW.darker();			}
+			
 			if(i > 11 && i < 16) {
-				cor = Color.RED.darker();
+//				cor = Color.RED.darker();
+				cor = Color.BLUE.darker();
 			}
 			
 			if(j != 60) {
@@ -164,7 +168,7 @@ public class Panel extends JPanel {
 		g2d.fill(e);
 	}
 	
-	void criaEspaçoPinos(Double origemX, Double origemY, Graphics2D g2d) {
+	void criaEspacoPinos(Double origemX, Double origemY, Graphics2D g2d) {
 		Double[] coord = {origemY, origemX};
 		fazCirculo(coord[1], coord[0], 40.0, 40.0, Color.WHITE, g2d);
 		casasIniciaisCood.add(coord);
