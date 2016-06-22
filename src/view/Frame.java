@@ -9,7 +9,7 @@ import controller.GameController;
 public class Frame extends JFrame {
 	
 	Panel p = new Panel();
-	JButton b1, b2;
+	JButton b1, b2, b3;
 	JLabel label, label2;
 	GameController controller = new GameController(p);
 	boolean flagDado = false;
@@ -20,6 +20,7 @@ public class Frame extends JFrame {
 	public Frame() {
 		b1 = new JButton("Dado");
 		b2 = new JButton("Gera ordem");
+		b3 = new JButton("Passar a vez");
 		label = new JLabel();
 		label2 = new JLabel();
 
@@ -67,6 +68,15 @@ public class Frame extends JFrame {
 					label2.setText("Equipe da vez:"+cor);
 					inicioJogo = false;
 					b2.hide();
+			}
+		});
+		
+		b3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.passaVez();
+				String cor = controller.getCorEquipedaVez();
+				label2.setText("Equipe da vez:"+cor);
+				flagDado = false;
 			}
 		});
 		
@@ -121,11 +131,13 @@ public class Frame extends JFrame {
 		p.add(label2);
 		p.add(b1);
 		p.add(b2);
+		p.add(b3);
 		
 		setSize(800, 620);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		b1.setBounds(650, 300, 100, 50);
 		b2.setBounds(650, 150, 100, 50);
+		b3.setBounds(650, 100, 100, 50);
 	}
 	// get painel
 	public Panel getPainel() {

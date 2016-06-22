@@ -491,7 +491,7 @@ public class Tabuleiro {
 		return null;
 	}
 	
-	private void trocaTurno() {
+	public void trocaTurno() {
 		if(corEquipedaVez == Cor.Vermelho) {
 			corEquipedaVez = Cor.Verde;
 			

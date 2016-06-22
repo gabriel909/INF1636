@@ -61,6 +61,10 @@ public class GameController {
 		return valorReturn;
 	}
 	
+	public void passaVez() {
+		tabuleiro.trocaTurno();
+	}
+	
 	public boolean acessaTabuleiro(double x, double y) {
 		Pino pino = tabuleiro.achaPino(x, y);
 		boolean valorReturn;
