@@ -25,14 +25,6 @@ public class GameController {
 			Casa casa = casas.get(i);
 			painel.casasCoord.add(casa.getCoord());
 		} 
-		
-//		if()
-		
-//		for(int j = 0; j < casasColoridas.size(); j++) {
-//			for(int k = 0; k < casasColoridas.get(j).length; k++) {
-//				
-//			}
-//		}
 	}
 	
 	public void geraOrdemEquipes() {
