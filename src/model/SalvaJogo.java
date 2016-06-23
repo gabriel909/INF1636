@@ -35,6 +35,10 @@ public class SalvaJogo {
 					}
 				}
 				
+				if(pino.estaCaminhoColorido()) {
+					writer.write("C"+pino.casaAtual);
+				}
+				
 				if(pino.estaCasaInicial) {
 					writer.write("I\n");
 				} else {
@@ -44,10 +48,8 @@ public class SalvaJogo {
 			}
 		} catch(FileNotFoundException e ) {
 			System.out.println("Arquivo não Encontrado");
-		}
-		
-		
-		
-		
+		}	
 	}
+	
+	public void leArquivo()
 }

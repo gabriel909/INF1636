@@ -109,6 +109,7 @@ public class Tabuleiro {
 		Pino pinoComido = pinosCasaDestino.get(0);
 		pinosCasaDestino.clear();
 		pinoComido.estaCasaInicial = true;
+		pinoComido.qtdCasasAndadas = 0;
 		
 	}
 	
@@ -211,6 +212,7 @@ public class Tabuleiro {
 		}
 		if(!pino.estaCaminhoColorido()) {
 			pino.estaCasaInicial = true;
+			pino.qtdCasasAndadas = 0;
 			trocaTurno();
 			return true;
 		} else {
