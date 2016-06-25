@@ -2,6 +2,8 @@ package controller;
 
 import view.*;
 import model.*;
+
+import java.io.IOException;
 import java.util.*;
 
 public class GameController {
@@ -25,6 +27,17 @@ public class GameController {
 			Casa casa = casas.get(i);
 			painel.casasCoord.add(casa.getCoord());
 		} 
+			List<Pino> pinos = new ArrayList<Pino>();
+		
+		
+		
+		try {
+			SalvaJogo.getSingleton().escreveArquivo(tabuleiro.getPinos());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	public void geraOrdemEquipes() {

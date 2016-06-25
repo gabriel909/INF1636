@@ -114,7 +114,6 @@ public class Panel extends JPanel {
 	}
 	
 	void criaPino(Graphics2D g2d) {
-		// TODO
 		Integer j[];
 		Double[] coord;
 		double y, x, raio = 35.0;

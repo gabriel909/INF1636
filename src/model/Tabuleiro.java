@@ -237,8 +237,10 @@ public class Tabuleiro {
 		int posicaoCasaDestino = ((pinoEmMovimento.qtdCasasAndadas + valorDado) - 52);
 		int posicaoCasaDestinoArrayPanel = posicaoCasaDestino + (indiceEquipe * 6);
 		
-		if(pinoEmMovimento.estaCaminhoColorido() && (pinoEmMovimento.qtdCasasAndadas + valorDado) == 58) {
+		if(pinoEmMovimento.estaCaminhoColorido() && (pinoEmMovimento.qtdCasasAndadas + valorDado) == 57) {
 			equipes.get(indiceEquipe).addPinoCasaFinal();
+			Casa casaDestino = casasColoridas.get(indiceEquipe)[posicaoCasaDestino];
+			casaDestino.adicionaPino(pinoEmMovimento);
 			System.out.println("Pino casa final");
 			
 //			pino
@@ -405,27 +407,27 @@ public class Tabuleiro {
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(i == 0) {					
-					coordSub -= 40.0;
-					Casa casa = new Casa(280.0, coordSub, Cor.Amarelo);
+					coordAdd += 40.0;
+					Casa casa = new Casa(280.0, coordAdd, Cor.Vermelho);
 					arrayCasas[j] = casa;
 				}
 				
 				if(i == 1) {
-					coordSub -= 40.0;
-					Casa casa = new Casa(coordSub, 280.0, Cor.Azul);
+					coordAdd += 40.0;
+					Casa casa = new Casa(coordAdd, 280.0, Cor.Verde);
 					arrayCasas[j] = casa;
 				}
 				
 				if(i == 2) {
-					coordAdd += 40.0;
-					Casa casa = new Casa(coordAdd, 280.0, Cor.Verde);
+					coordSub -= 40.0;
+					Casa casa = new Casa(280.0, coordSub, Cor.Amarelo);
 					arrayCasas[j] = casa;
 					
 				}
 				
 				if(i == 3) {
-					coordAdd += 40.0;
-					Casa casa = new Casa(280.0, coordAdd, Cor.Vermelho);
+					coordSub -= 40.0;
+					Casa casa = new Casa(coordSub, 280.0, Cor.Azul);
 					arrayCasas[j] = casa;
 				}
 			}
@@ -468,7 +470,7 @@ public class Tabuleiro {
 		}
 	}
 	
-	public String getEquipedaVez(){
+	public String getEquipedaVez() {
 		String cor;
 		if(corEquipedaVez == Cor.Amarelo){
 			cor = "Amarelo";
@@ -494,6 +496,7 @@ public class Tabuleiro {
 	}
 	
 	public void trocaTurno() {
+		tirou6 = 0;
 		if(corEquipedaVez == Cor.Vermelho) {
 			corEquipedaVez = Cor.Verde;
 			
@@ -528,5 +531,19 @@ public class Tabuleiro {
 			default:
 				return 3;
 		}
+	}
+	
+	public List<Pino> getPinos() {
+		List<Pino> pinos = new ArrayList<Pino>();
+		
+		for(int i = 0; i < equipes.size(); i++) {
+			List<Pino> pinosFor = equipes.get(i).getPinos();
+			
+			for(int j = 0; j < pinosFor.size(); j++) {
+				pinos.add(pinosFor.get(j));
+			}
+		}
+		
+		return pinos;
 	}
 }
