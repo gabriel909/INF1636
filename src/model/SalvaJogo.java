@@ -1,6 +1,6 @@
 package model;
 import java.io.*;
-import java.util.List;
+import java.util.*;
 
 public class SalvaJogo {
 	private static SalvaJogo salvaJogo = new SalvaJogo();
@@ -75,6 +75,38 @@ public class SalvaJogo {
 			File file = new File("save.txt");
 			FileReader reader = new FileReader(file);
 			char[] arrayChar = new char[200];
+			Scanner s = new Scanner(new BufferedReader(reader));
+			String next;
+			Equipe equipe = null;
+			Casa casa = null;
+			Pino pino = null;
+			int i = 0;
+			while(s.hasNext()) {
+				next = s.next();
+				switch(next) {
+					case "Vermelho":
+						equipe = tabuleiro.getEquipes().get(0);
+						break;
+					case "Verde":
+						equipe = tabuleiro.getEquipes().get(1);
+						break;
+					case "Amarelo":
+						equipe = tabuleiro.getEquipes().get(2);
+						break;
+					case "Azul":
+						equipe = tabuleiro.getEquipes().get(3);
+						break;
+				}
+				if(next.contains("I")) {
+					pino = equipe.getPinos().get(i);
+					pino.estaCasaInicial = true;
+					i++;
+				} else if(next.contains("C")) {
+					pino = equipe.getPinos().get(i);
+					
+				}
+				
+			}
 			
 			reader.read(arrayChar);
 			

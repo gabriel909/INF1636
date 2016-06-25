@@ -19,6 +19,10 @@ public class Tabuleiro {
 		criaCaminhoColorido();
 	}
 	
+	public List<Equipe> getEquipes() {
+		return equipes;
+	}
+	
 	// Get Casas
 	public List<Casa> getCasas() {
 		return casas;
@@ -267,16 +271,18 @@ public class Tabuleiro {
 				}
 			}
 		}
-		
+		System.out.println(x+" "+y);
 		for(int j = 0; j < casasColoridas.size(); j++) {
 			Casa[] arrayCasas = casasColoridas.get(j);
-			
+			System.out.println(j);
 			for(int k = 0; k < arrayCasas.length; k++) {
 				casa = arrayCasas[k];
 				coord = casa.getCoord();
-				
+				System.out.println(casa.cor);
+				System.out.println(coord[0]+" "+coord[1]);
 				if((x >= coord[0] && x<= coord[0] + 40) && (y >= coord[1] && y <= coord[1] + 40)) {
 					if(casa.getPinos().isEmpty()) {
+						System.out.println("pinto");
 						return null;
 					} else {
 						System.out.println("pino");
@@ -405,34 +411,38 @@ public class Tabuleiro {
 		Casa[] arrayCasas = new Casa[6];
 		
 		for(int i = 0; i < 4; i++) {
+			coordAdd = 0.0;
 			for(int j = 0; j < 6; j++) {
-				if(i == 0) {					
+			
+				if(i == 0) {		
 					coordAdd += 40.0;
 					Casa casa = new Casa(280.0, coordAdd, Cor.Vermelho);
 					arrayCasas[j] = casa;
-				}
-				
-				if(i == 1) {
+					System.out.println(coordAdd);
+				} else if(i == 1) {
 					coordAdd += 40.0;
 					Casa casa = new Casa(coordAdd, 280.0, Cor.Verde);
 					arrayCasas[j] = casa;
-				}
-				
-				if(i == 2) {
+					System.out.println(coordAdd);
+				} else if(i == 2) {
 					coordSub -= 40.0;
 					Casa casa = new Casa(280.0, coordSub, Cor.Amarelo);
 					arrayCasas[j] = casa;
-					
-				}
-				
-				if(i == 3) {
-					coordSub -= 40.0;
+					System.out.println(coordSub);
+				} else if(i == 3) {
+					coordSub += 40.0;
 					Casa casa = new Casa(coordSub, 280.0, Cor.Azul);
 					arrayCasas[j] = casa;
+					System.out.println(coordSub);
 				}
 			}
+			if(arrayCasas[0].cor == Cor.Amarelo) {
+				coordSub -= 40;
+			}
+			System.out.println(arrayCasas[0].cor);
 			casasColoridas.add(arrayCasas);
 		}
+		System.out.println(casasColoridas.size());
 	}
 	
 	public void setupInicial() {

@@ -6,7 +6,7 @@ public class Casa {
 	
 	private Double x, y;
 	private List<Pino> pinos = new ArrayList<Pino>();
-	private Cor cor;
+	public Cor cor;
 //	private boolean barreira = false;
 	private boolean abrigo = false;
 	
