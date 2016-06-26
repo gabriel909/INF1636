@@ -175,6 +175,7 @@ public class Tabuleiro {
 				
                 }
             } else {
+            	System.out.println("entrou");
                 movimentaPinoCaminhoColorido(pinoEmMovimento, valorDado);
             }
 
@@ -239,7 +240,10 @@ public class Tabuleiro {
 	public void movimentaPinoCaminhoColorido(Pino pinoEmMovimento, int valorDado) {
 		int indiceEquipe = getIndiceCor(pinoEmMovimento.getCor());
 		int posicaoCasaDestino = ((pinoEmMovimento.qtdCasasAndadas + valorDado) - 52);
+		System.out.println(pinoEmMovimento.qtdCasasAndadas);
+		System.out.println(valorDado);
 		int posicaoCasaDestinoArrayPanel = posicaoCasaDestino + (indiceEquipe * 6);
+		System.out.println(posicaoCasaDestinoArrayPanel);
 		
 		if(pinoEmMovimento.estaCaminhoColorido() && (pinoEmMovimento.qtdCasasAndadas + valorDado) == 57) {
 			equipes.get(indiceEquipe).addPinoCasaFinal();
@@ -247,9 +251,11 @@ public class Tabuleiro {
 			casaDestino.adicionaPino(pinoEmMovimento);
 			System.out.println("Pino casa final");
 			
+			
+			
 //			pino
 			
-		} else {
+		} else if(!pinoEmMovimento.estaCaminhoColorido()){
 			System.out.println(posicaoCasaDestino);
 			pinoEmMovimento.casaAtual = posicaoCasaDestinoArrayPanel;
 			Casa casaDestino = casasColoridas.get(indiceEquipe)[posicaoCasaDestino];
@@ -257,6 +263,7 @@ public class Tabuleiro {
 			
 			pinoEmMovimento.qtdCasasAndadas += valorDado;
 		}
+		
 	}
 
 	public Pino achaPino(double x, double y) {
@@ -408,11 +415,13 @@ public class Tabuleiro {
 	
 	private void criaCaminhoColorido() {
 		Double coordAdd = 0.0, coordSub = 560.0;
-		Casa[] arrayCasas = new Casa[6];
+		
 		
 		for(int i = 0; i < 4; i++) {
 			coordAdd = 0.0;
+			Casa[] arrayCasas = new Casa[6];
 			for(int j = 0; j < 6; j++) {
+				
 			
 				if(i == 0) {		
 					coordAdd += 40.0;
@@ -555,5 +564,49 @@ public class Tabuleiro {
 		}
 		
 		return pinos;
+	}
+	
+	public boolean checaVencedor(Pino pino) {
+		int indiceEquipe = getIndiceCor(pino.getCor());
+		if(equipes.get(indiceEquipe).qtdPinosCasaFinal == 4) {
+			return true;
+		} 
+		
+		return false;
+	}
+	
+	public List<Cor> defineColocados() {
+		int[] pontos = {0,0,0,0};
+		int[] pontos2 = {0,0,0,0};
+		int index = 0;
+		List<Cor> coresColoc = new ArrayList<Cor>();
+		for(Equipe e: equipes) {
+			for(Pino p: e.getPinos()) {
+				index = equipes.indexOf(e);
+				pontos[index] += p.qtdCasasAndadas; 
+				}
+		pontos2[index] = pontos[index];
+		}
+		Arrays.sort(pontos);
+		int j = 0;
+		for(int ponto: pontos2) {
+			for(int i = 0; i< pontos.length; i++) {
+				if(ponto == pontos[i]) {
+					if(j == 0) {
+						coresColoc.add(i, Cor.Vermelho);
+					} else if(j == 1) {
+						coresColoc.add(i, Cor.Verde);
+					} else if(j == 2) {
+						coresColoc.add(i, Cor.Amarelo);
+					} else {
+						coresColoc.add(i, Cor.Azul);
+					}
+				}
+			}
+		j++;
+		}
+	
+	return coresColoc;
+		
 	}
 }

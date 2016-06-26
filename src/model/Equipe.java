@@ -6,7 +6,7 @@ public class Equipe {
 	
 	protected List<Pino> pinos;
 	private Cor cor;
-	private int qtdPinosCasaFinal = 0;
+	public int qtdPinosCasaFinal = 0;
 	protected int dado;
 	protected Pino ultimoPinoMovimentado;
 	

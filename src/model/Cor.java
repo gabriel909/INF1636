@@ -1,5 +1,5 @@
 package model;
 
-enum Cor {
+public enum Cor {
 	Amarelo, Azul, Verde, Vermelho, Branco;
 }

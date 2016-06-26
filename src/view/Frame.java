@@ -1,15 +1,18 @@
 package view;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.io.IOException;
 import javax.swing.*;
 
 import controller.GameController;
+import model.Cor;
+import model.SalvaJogo;
+import model.Tabuleiro;
 
 public class Frame extends JFrame {
 	
 	Panel p = new Panel();
-	JButton b1, b2, b3;
+	JButton b1, b2, b3, b4, b5;
 	JLabel label, label2;
 	GameController controller = new GameController(p);
 	boolean flagDado = false;
@@ -21,6 +24,8 @@ public class Frame extends JFrame {
 		b1 = new JButton("Dado");
 		b2 = new JButton("Gera ordem");
 		b3 = new JButton("Passar a vez");
+		b4 = new JButton("Salvar");
+		b5 = new JButton("Carregar");
 		label = new JLabel();
 		label2 = new JLabel();
 
@@ -46,6 +51,7 @@ public class Frame extends JFrame {
 							getContentPane().repaint();
 							String cor = controller.getCorEquipedaVez();
 							label2.setText("Equipe da vez:"+cor);
+							
 						}
 					} else if(dado == 6){
 						label.setText(Integer.toString(dado));
@@ -80,8 +86,33 @@ public class Frame extends JFrame {
 			}
 		});
 		
+		b4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					SalvaJogo.getSingleton().escreveArquivo(controller.getPinosTabuleiro());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		b5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					SalvaJogo.getSingleton().leArquivo(controller.getTabuleiro());
+					controller.updateView();
+					getContentPane().validate();
+					getContentPane().repaint();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
 		p.setLayout(null);
-		label.setBounds(685, 400, 50, 50);
+		label.setBounds(685, 355, 50, 50);
 		label.setFont(new Font("Arial", Font.PLAIN, 50));
 		label2.setBounds(615,200, 175, 100);
 		label2.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -115,13 +146,19 @@ public class Frame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(flagDado && !inicioJogo) {
+					String cor2 = controller.getCorEquipedaVez();
 					if(controller.acessaTabuleiro(e.getX(), e.getY())) {
 //						if()
 //						controller.updateView();
+						
 						String cor = controller.getCorEquipedaVez();
 						label2.setText("Equipe da vez: "+cor);
 						getContentPane().validate();
 						getContentPane().repaint();
+						if(controller.checaVencedor()) {
+							java.util.List<Cor> coresColoc = controller.defineColocacoes();
+							JOptionPane.showMessageDialog(null, cor2+" Você Ganhou\nSegundo: "+coresColoc.get(2)+"\nTerceiro: "+coresColoc.get(1)+"\nQuarto: "+coresColoc.get(0));
+						}
 						flagDado = false;
 					}
 				}
@@ -132,12 +169,16 @@ public class Frame extends JFrame {
 		p.add(b1);
 		p.add(b2);
 		p.add(b3);
+		p.add(b4);
+		p.add(b5);
 		
 		setSize(800, 620);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		b1.setBounds(650, 300, 100, 50);
 		b2.setBounds(650, 150, 100, 50);
 		b3.setBounds(650, 100, 100, 50);
+		b4.setBounds(650, 500, 100, 50);
+		b5.setBounds(650, 445, 100, 50);
 	}
 	// get painel
 	public Panel getPainel() {

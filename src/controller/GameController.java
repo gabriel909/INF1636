@@ -11,6 +11,7 @@ public class GameController {
 	Panel painel;
 	Frame f;
 	static int dado = 0;
+	Pino pino = null;
 	
 	public GameController(Panel panel) {
 //		this.f = f;
@@ -28,17 +29,9 @@ public class GameController {
 			painel.casasCoord.add(casa.getCoord());
 		} 
 			List<Pino> pinos = new ArrayList<Pino>();
-		
-		
-		
-		try {
-			SalvaJogo.getSingleton().escreveArquivo(tabuleiro.getPinos());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
+	
 	
 	public void geraOrdemEquipes() {
 		tabuleiro.geraDadoInicialDasEquipes();
@@ -71,7 +64,7 @@ public class GameController {
 	}
 	
 	public boolean acessaTabuleiro(double x, double y) {
-		Pino pino = tabuleiro.achaPino(x, y);
+		pino = tabuleiro.achaPino(x, y);
 		boolean valorReturn;
 		if(pino != null) {
 //			if(pino.getCasaInical()) {
@@ -83,6 +76,22 @@ public class GameController {
 			return valorReturn;
 		}
 		return false;
+	}
+	
+	public List<Pino> getPinosTabuleiro() {
+		return tabuleiro.getPinos();
+	}
+	
+	public boolean checaVencedor() {
+		return tabuleiro.checaVencedor(pino);
+	}
+	
+	public List<Cor> defineColocacoes() {
+		return tabuleiro.defineColocados();
+	}
+	
+	public Tabuleiro getTabuleiro() {
+		return tabuleiro;
 	}
 	
 	
